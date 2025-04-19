@@ -1,6 +1,6 @@
 <?php
 
-namespace Model\vo;
+namespace Model\VO;
 
 final class UserVO extends VO {
     
