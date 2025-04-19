@@ -29,31 +29,7 @@
                     <tr>
                         <td>C418</td>
                         <td>
-                            <audio src="../musicas/The C418 Playlist.mp3" controls></audio>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Shadow of the Colossus</td>
-                        <td>
-                            <audio src="../musicas/Shadow of the Colossus Soundtrack.mp3" controls></audio>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Medieval Philosopher</td>
-                        <td>
-                            <audio src="../musicas/Filosofo Medieval.mp3" controls></audio>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>What a Classic</td>
-                        <td>
-                            <audio src="../musicas/What a Classic.mp3" controls></audio>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Death Note</td>
-                        <td>
-                            <audio src="../musicas/Study as if you_re Light Yagami.mp3" controls></audio>
+                            <audio src="/media/musics/minecraft.mp3" controls></audio>
                         </td>
                     </tr>
                 </tbody>

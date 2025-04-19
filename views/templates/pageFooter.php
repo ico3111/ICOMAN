@@ -10,10 +10,10 @@
                         &nbsp;
                         <select id="selectImage">
                             <option value="none" selected>Background Image (none)</option>
-                            <option value="imgs/backgroud/1.jpg">Shadow 1</option>
-                            <option value="imgs/backgroud/2.jpg">Shadow 2</option>
-                            <option value="imgs/backgroud/3.jpg">Shadow 3</option>
-                            <option value="imgs/backgroud/4.jpg">Shadow 4</option>
+                            <option value="/media/backgrounds/1.jpg">Shadow 1</option>
+                            <option value="/media/backgrounds/2.jpg">Shadow 2</option>
+                            <option value="/media/backgrounds/3.jpg">Shadow 3</option>
+                            <option value="/media/backgrounds/4.jpg">Shadow 4</option>
                         </select>
                     </center>
                     <br>
@@ -29,8 +29,8 @@
         </tbody>
     </table>
 </center>
-<script src="scripts/cronometro.js"></script>
-<script src="scripts/timer.js"></script>
-<script src="scripts/changeBackground.js"></script>
+<script src="/views/scripts/cronometro.js"></script>
+<script src="/views/scripts/timer.js"></script>
+<script src="/views/scripts/changeBackground.js"></script>
 </body>
 </html>

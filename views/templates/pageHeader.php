@@ -10,10 +10,10 @@
 <center>
     <table width="60%">
         <tbody>
-            <tr class="header" style="background-color: #3b5998; color: white">
+            <tr id="header" style="background-color: #3b5998; color: white">
                 <td>
                     <center>
-                        <h2>[ Task & Tune ]</h2>
+                        <h2>[ StudyHub ]</h2>
                     </center>
                 </td>
                 <td>
