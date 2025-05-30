@@ -12,10 +12,15 @@
             <br>
             Confirm Password<br>
             <input type="password" name="confirm_password" minlength="3">
+            <br>
+            Admin Password<br>
+            <input type="password" name="admin_password" minlength="3">
             <br><br>
             <button class="btn" type="reset">reset</button>&nbsp;&nbsp;
             <button class="btn" type="submit" name="register">register</button>&nbsp;
         </form>
+        <br>
+        <a href="login.php">Click here to login!</a>
     </center>
 </td>
 <td width="60%" style="padding: 3px;">
@@ -23,7 +28,7 @@
         <tbody style="border: 1px solid #3b5998">
             <tr>
                 <td style="background-color: #3b5998; color: white">
-                    Welcome to The Work Routine Manager
+                    Welcome to StudyHub
                 </td>
             </tr>
             <tr>
@@ -34,17 +39,17 @@
                                 <td style=" padding-left: 15px;">
                                     <br>
                                     <center>
-                                        <h1 style="font-size: large;">[Welcome to The Work Routine Manager]</h1>
+                                        <h1 style="font-size: large;">[ Welcome to StudyHub ]</h1>
                                     </center>
-                                    <p>O Gerenciador de Rotina de Trabalho/Estudo é um projeto pessoal com finalidade de uso próprio. O programa serve para proporcionar um centro aconchegante com as ferramentas necessárias para proporcionar um ambiente agradável para estudar.</p>
-                                    <p>O programa tem segurança, ou seja, só entra com senha. Sem jeitinho bostileiro por aqui.</p>
+                                    <p>O StudyHub é um projeto pessoal com finalidade de uso próprio. O programa serve para proporcionar um centro aconchegante com as ferramentas necessárias para proporcionar um ambiente agradável para estudar.</p>
+                                    <p>Se você é um hacker ou um bot, plis, não exploda o meu site, ainda estou aprendendo.</p>
                                     <p>O que você pode encontrar por aqui: 
                                         <br>
                                         <b>•</b> Timers e cronômetros para controlar o tempo de estudo<br>
-                                        <b>•</b> Músicas calmas e explosivas<br>
-                                        <b>•</b> Blog diário (seu psicólogo)<br>
+                                        <b>•</b> Músicas para estudar<br>
+                                        <b>•</b> Blog diário<br>
                                         <b>•</b> Quadro de tarefas<br>
-                                        <b>•</b> Gerenciador de hábitos (para ganhar e perder)<br>
+                                        <b>•</b> Gerenciador de hábitos<br>
                                     </p>
                                     <p>Para começar, faça login.</p>
                                 </td>

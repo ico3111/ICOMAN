@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="views/styles/login.css">
-    <title>Login</title>
+    <title>StudyHub</title>
 </head>
 <body>
 <center>
@@ -14,6 +14,10 @@
                 <td>
                     <center>
                         <h2>[ StudyHub ]</h2>
+                        <?php 
+                        echo isset($_GET['message']) ? "<p>". $_GET['message'] ."</p>" : '';
+                        echo isset($_GET['error']) ? "<p style='color: red;'>". $_GET['message'] ."</p>" : '';
+                        ?>
                     </center>
                 </td>
                 <td>

@@ -25,6 +25,13 @@ final class UserModel extends Model {
         $data = $db->select($query, [':user_name' => $vo->getUsername()]);
         return new UserVO($data[0]['id'], $data[0]['user_name'], $data[0]['user_password']);
     }
+
+    public function selectOneId($vo) {
+        $db = new Database();
+        $query = "SELECT id, user_name, user_password FROM users WHERE id = :id";
+        $data = $db->select($query, [':id' => $vo->getId()]);
+        return new UserVO($data[0]['id'], $data[0]['user_name'], $data[0]['user_password']);
+    }
     
     public function insert($vo) {
         $db = new Database();

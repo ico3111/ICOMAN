@@ -27,9 +27,15 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>C418</td>
+                        <td>C418 - Aria Math</td>
                         <td>
-                            <audio src="/media/musics/minecraft.mp3" controls></audio>
+                            <audio src="/media/musics/minecraft1.mp3" controls></audio>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>C418 - Moog City</td>
+                        <td>
+                            <audio src="/media/musics/minecraft2.mp3" controls></audio>
                         </td>
                     </tr>
                 </tbody>
