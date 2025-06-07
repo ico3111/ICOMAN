@@ -8,7 +8,7 @@
 </head>
 <body>
 <center>
-    <table width="60%">
+    <table width="80%">
         <tbody>
             <tr id="header" style="background-color: #3b5998; color: white">
                 <td>

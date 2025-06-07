@@ -16,16 +16,22 @@ final class TaskController extends Controller {
     public function addTask() {
         
         if (empty($_POST['title']) || empty($_POST['deadline'])) { $this->redirect('tasks.php?Preencha os campos obrigatorios.'); }
-
+        
         $model = new TaskModel();
         try {
-            $model->insert(new TaskVO('', $_POST['title'], $_POST['description'], $_POST['deadline'], $this->getUserId()));
+            $model->insert(new TaskVO(
+                '', 
+                $_POST['title'], 
+                $_POST['description'], 
+                $_POST['deadline'], 
+                $this->getUserId(),
+                $_POST['isChecked']
+            ));
         } catch (Exception $e) {
             $this->redirect('tasks.php?Algo deu errado ao adicionar a task.');
         }
 
         $this->redirect('tasks.php?message=Task adicionada com sucesso');
-
     }
 
     public function updateTask() {
@@ -33,9 +39,15 @@ final class TaskController extends Controller {
         if (empty($_POST['title']) || empty($_POST['deadline'])) { $this->redirect('tasks.php?message=Preencha os campos obrigatorios.'); }
 
         $model = new TaskModel();
-        $model->update(new TaskVO($_POST['id'], $_POST['title'], $_POST['description'], $_POST['deadline'], $_POST['user_id']));
+        $model->update(new TaskVO(
+            $_POST['id'], 
+            $_POST['title'], 
+            $_POST['description'], 
+            $_POST['deadline'], 
+            $_POST['user_id'],
+            $_POST['isChecked']
+        ));
         $this->redirect('tasks.php');
-        
     }
 
     public function deleteTask() {

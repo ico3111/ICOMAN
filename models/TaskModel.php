@@ -14,7 +14,14 @@ final class TaskModel extends Model {
         $arrayDados = [];
         
         foreach ($data as $row) {
-            array_push($arrayDados, new TaskVO($row['id'], $row['task_title'], $row['task_description'], $row['task_deadline'], $row['user_id']));
+            array_push($arrayDados, new TaskVO (
+                $row['id'], 
+                $row['task_title'], 
+                $row['task_description'], 
+                $row['task_deadline'], 
+                $row['user_id'],
+                $row['is_checked']
+            ));
         }
 
         return $arrayDados;
@@ -26,12 +33,23 @@ final class TaskModel extends Model {
     
     public function insert($vo) {
         $db = new Database();
-        $query = "INSERT INTO tasks (task_title, task_description, task_deadline, user_id) VALUES (:task_title, :task_description, :task_deadline, :user_id)";
+        $query = "INSERT INTO tasks (
+                              task_title, 
+                              task_description, 
+                              task_deadline, 
+                              user_id, 
+                              is_checked) 
+                       VALUES (:task_title, 
+                              :task_description, 
+                              :task_deadline, 
+                              :user_id, 
+                              :is_checked)";
         $binds = [
             ':task_title' => $vo->getTitle(), 
             ':task_description' => $vo->getDescription(), 
             ':task_deadline' => $vo->getDeadline(), 
-            ':user_id' => $vo->getUserId()
+            ':user_id' => $vo->getUserId(),
+            ':is_checked' => $vo->getIsChecked()
         ];
      
         $db->execute($query, $binds);
@@ -39,11 +57,17 @@ final class TaskModel extends Model {
     
     public function update($vo) {
         $db = new Database();
-        $query = "UPDATE tasks SET task_title = :task_title, task_description = :task_description, task_deadline = :task_deadline WHERE id = :id";
+        $query = "UPDATE tasks 
+                     SET task_title = :task_title, 
+                         task_description = :task_description, 
+                         task_deadline = :task_deadline, 
+                         is_checked = :is_checked 
+                   WHERE id = :id";
         $binds = [
             ':task_title' => $vo->getTitle(), 
             ':task_description' => $vo->getDescription(), 
             ':task_deadline' => $vo->getDeadline(), 
+            ':is_checked' => $vo->getIsChecked(),
             ':id' => $vo->getId()
         ];
         

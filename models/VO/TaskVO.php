@@ -8,13 +8,15 @@ final class TaskVO extends VO {
     private $description;
     private $deadline;
     private $userId;
+    private $isChecked;
     
-    public function __construct($id = 0, $title = '', $description = '', $deadline = '', $userId = '') {
+    public function __construct($id = 0, $title = '', $description = '', $deadline = '', $userId = '', $isChecked = null) {
         parent::__construct($id);
         $this->title = $title;
         $this->description = $description;
         $this->deadline = $deadline;
         $this->userId = $userId;
+        $this->isChecked = $isChecked;
     }
 
     public function getTitle() { return $this->title; }
@@ -28,5 +30,8 @@ final class TaskVO extends VO {
 
     public function getUserId() { return $this->userId; }
     public function setUserId($userId) { $this->userId = $userId; }
+
+    public function getIsChecked() { return $this->isChecked; }
+    public function setIsChecked($isChecked) { $this->isChecked = $isChecked; }
 
 }

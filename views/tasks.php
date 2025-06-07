@@ -16,6 +16,7 @@
                                             <td>
                                             <table>
                                                     <tr>
+                                                        <td><input type="checkbox" name="isChecked"></td>
                                                         <td><input type="text" name="title"></td>
                                                         <td><textarea name="description" cols="30" rows="1"></textarea></td>
                                                         <td><input type="date" name="deadline"></td>
@@ -42,6 +43,7 @@
                             <table width="100%">
                                 <thead>
                                     <tr>
+                                        <th>Status</th>
                                         <th>Topic</th>
                                         <th>Task</th>
                                         <th>Deadline</th>
@@ -55,6 +57,9 @@
                                             <td>                                                            
                                                 <input type="hidden" name="id" value="<?php echo $task->getId(); ?>">
                                                 <input type="hidden" name="user_id" value="<?php echo $task->getUserId(); ?>">
+                                                <input type="checkbox" name="isChecked" <?php echo $task->getIsChecked() == 'on' ? 'checked' : '' ?>>
+                                            </td>
+                                            <td>
                                                 <textarea name="title" cols="20" rows="1"><?php echo $task->getTitle(); ?></textarea>
                                             </td>
                                             <td>
