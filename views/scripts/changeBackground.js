@@ -1,11 +1,7 @@
 function changeBackground() { 
     const table = document.getElementById('motherTable');
-    
-    document.getElementById('selectImage').addEventListener('change', function() {
-        document.body.style.backgroundImage = `url(${this.value})`; 
-    });
 
-    document.getElementById('selectTheme').addEventListener('change', function() {
+    function changeTheme() {
         const theme = this.value;
 
         if (theme === 'light') {
@@ -17,7 +13,18 @@ function changeBackground() {
             document.body.style.color = 'white'; 
             table.style.backgroundColor = '#111';
         }
-    });
+    }
+
+    function changeImage() {
+        document.body.style.backgroundImage = `url(${this.value})`; 
+    }
+    
+    document.getElementById('selectTheme').addEventListener('change', changeTheme);
+    document.getElementById('selectImage').addEventListener('change', changeImage);
+
+    changeTheme();
+    changeImage();
+
 }
 
-changeBackground();
+document.addEventListener('DOMContentLoaded', changeBackground);

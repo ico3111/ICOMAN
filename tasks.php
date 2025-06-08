@@ -2,7 +2,9 @@
 
 require 'vendor/autoload.php';
 
-require_once('utils.php'); verifyLogin();
+require_once('utils.php'); 
+    verifyLogin();
+    verifyPrefsPosted();
 
 use Controller\TaskController;
 
