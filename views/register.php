@@ -1,4 +1,14 @@
-<?php include_once('templates/pageHeader.php'); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="views/styles/style1.css">
+    <title>Register</title>
+</head>
+<body>
+
+<?php include_once('views/templates/pageHeader.php'); ?>
 
 <td valign="top" style="padding: 3px;">
     <center>
@@ -61,5 +71,7 @@
         </tbody>
     </table>
 </td>
-         
+ 
 <?php include_once('views/templates/pageFooter.php'); ?>
+</body>
+</html>

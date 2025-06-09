@@ -8,7 +8,7 @@ final class TaskModel extends Model {
 
     public function selectAll($vo) {
         $db = new Database();
-        $query = "SELECT * FROM tasks WHERE user_id = :user_id";
+        $query = "SELECT * FROM tasks WHERE user_id = :user_id ORDER BY task_deadline ASC";
         $data = $db->select($query,  [':user_id' => $vo->getId()]);
 
         $arrayDados = [];

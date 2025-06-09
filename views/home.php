@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="views/styles/style1.css">
     <style>
         table {border-collapse: collapse;}
         td,th {border: 1px solid #3b5998; text-align: center; vertical-align: middle;}
@@ -12,8 +13,8 @@
     <title>Home</title>
 </head>
 <body>
-    <?php include_once('views/templates/pageHeader.php'); ?>
 
+    <?php include_once('views/templates/pageHeader.php'); ?>
     <td> 
         <center>
             <h3>[Your Study Musics]</h3>
@@ -29,13 +30,13 @@
                     <tr>
                         <td>C418 - Aria Math</td>
                         <td>
-                            <audio src="/media/musics/minecraft1.mp3" controls></audio>
+                            <audio src="media/musics/minecraft1.mp3" controls></audio>
                         </td>
                     </tr>
                     <tr>
                         <td>C418 - Moog City</td>
                         <td>
-                            <audio src="/media/musics/minecraft2.mp3" controls></audio>
+                            <audio src="media/musics/minecraft2.mp3" controls></audio>
                         </td>
                     </tr>
                 </tbody>
@@ -111,7 +112,9 @@
         </center>
         <br>
     </td>
-
     <?php include_once('views/templates/pageFooter.php'); ?>
+
+    <script src="views/scripts/cronometro.js"></script>
+    <script src="views/scripts/timer.js"></script>
 </body>
 </html>

@@ -1,5 +1,14 @@
-<?php include_once('templates/pageHeader.php'); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="views/styles/style1.css">
+    <title>Posts</title>
+</head>
+<body>
 
+<?php include_once('views/templates/pageHeader.php'); ?>
 <td colspan="2">
     <br>
     <center>
@@ -71,5 +80,24 @@
     </center>
     <br>
 </td>
-         
-<?php include_once('templates/pageFooter.php'); ?>
+<?php include_once('views/templates/pageFooter.php'); ?>
+
+<script>
+    document.getElementById("selectImage").addEventListener("change", function () {
+        document.body.style.backgroundImage = `url(${this.value})`;
+    });
+
+    document.getElementById("selectTheme").addEventListener("change", function () {
+        const theme = this.value;
+
+        if (theme === "light") {
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+        } else if (theme === "dark") {
+            document.body.style.backgroundColor = "black";
+            document.body.style.color = "white";
+        }
+    });
+</script>
+</body>
+</html>
