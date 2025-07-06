@@ -45,9 +45,11 @@
                                 <center>
                                     <table>
                                         <tbody>
+                                            <form action="post_edit.php" method="post">
                                             <tr>
                                                 <td colspan="2">
-                                                    <?php echo $post->getTitle(); ?>
+                                                    <input type="hidden" name="id" value="<?php echo $post->getId(); ?>">
+                                                    <textarea name="title" cols="25" rows="1"><?php echo $post->getTitle(); ?></textarea>
                                                 </td>
                                                 <td>
                                                     <?php echo $post->getUserName(); ?>
@@ -56,18 +58,18 @@
                                                     <?php echo $post->getDate(); ?>
                                                 </td>
                                                 <td>
-                                                    <a href="post_del.php?id=<?php echo $post->getId(); ?>">
-                                                        <button type="button"> Delete</button>
-                                                    </a>
+                                                    <button type="submit" name="editPost">Update</button>
+                                                    <button type="submit" name="deletePost">Delete</button>      
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="5">
                                                     <center>
-                                                        <textarea style="background-color: white; color: black;" rows="5" cols="70" disabled><?php echo $post->getContent();?></textarea>
+                                                        <textarea name="content" rows="5" cols="70"><?php echo $post->getContent();?></textarea>
                                                     </center>
                                                 </td>
                                             </tr>
+                                            </form>
                                         </tbody>
                                     </table>
                                 </center>

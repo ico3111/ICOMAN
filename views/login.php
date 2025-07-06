@@ -43,7 +43,7 @@
                                     <center>
                                         <h1 style="font-size: large;">[ StudyHub ]</h1>
                                     </center>
-                                    <p>O StudyHub é um projeto pessoal com finalidade de uso próprio e talvez de alguns amigos próximos. O programa serve para proporcionar um centro aconchegante com as ferramentas necessárias para proporcionar um ambiente agradável para estudar.</p>
+                                    <p>O StudyHub é um projeto pessoal com finalidade de uso próprio. O programa serve um centro organizacional e aconchegante com as ferramentas necessárias para proporcionar um ambiente agradável para estudar.</p>
                                     <p>Se você é um hacker ou um bot, plis, não exploda o meu site, ainda estou aprendendo.</p>
                                     <p>O que você pode encontrar por aqui: 
                                         <br>
@@ -51,7 +51,7 @@
                                         <b>•</b> Músicas para estudar<br>
                                         <b>•</b> Blog diário<br>
                                         <b>•</b> Quadro de tarefas<br>
-                                        <b>•</b> Gerenciador de hábitos (para ganhar e perder)<br>
+                                        <b>•</b> Gerenciador de hábitos<br>
                                     </p>
                                     <p>Para começar, faça login.</p>
                                 </td>

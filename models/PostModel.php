@@ -33,6 +33,24 @@ final class PostModel {
         $db->execute($query, $binds);
     }
     
+    public function update($vo) {
+        $db = new Database();
+        $query = "UPDATE posts 
+                     SET post_title = :post_title, 
+                         post_content = :post_content, 
+                         post_date = :post_date
+                   WHERE id = :id";
+        $binds = [
+            ':post_title' => $vo->getTitle(), 
+            ':post_content' => $vo->getContent(), 
+            ':post_date' => $vo->getDate(), 
+            ':id' => $vo->getId()
+        ];
+        
+        $db->execute($query, $binds);
+        
+    }
+
     public function delete($vo) {
         $db = new Database();
         $query = "DELETE FROM posts WHERE id = :id";
