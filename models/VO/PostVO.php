@@ -8,14 +8,16 @@ final class PostVO extends VO {
     private $content;
     private $date;
     private $userId;
+    private $channelId;
     private $userName;
     
-    public function __construct($id = 0, $title = '', $content = '', $date = '', $userId = '', $userName = '') {
+    public function __construct($id = 0, $title = '', $content = '', $date = '', $userId = '', $channelId = '', $userName = '') {
         parent::__construct($id);
         $this->title = $title;
         $this->content = $content;
         $this->date = $date;
         $this->userId = $userId;
+        $this->channelId = $channelId;
         $this->userName = $userName;
     }
 
@@ -30,6 +32,9 @@ final class PostVO extends VO {
 
     public function getUserId() { return $this->userId; }
     public function setUserId($userId) { $this->userId = $userId; }
+
+    public function getChannelId() { return $this->channelId; }
+    public function setChannelId($channelId) { $this->channelId = $channelId; }
 
     public function getUserName() { return $this->userName; }
     public function setUserName($userName) { $this->userName = $userName; }

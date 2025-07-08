@@ -22,6 +22,7 @@
                                 <tbody>
                                     <tr>
                                         <td>
+                                            <input type="hidden" name="channel_id" value="<?php echo $_GET['id']; ?>">
                                             <input type="text" name="title" placeholder="Title" required>
                                         </td>
                                         <td rowspan="2">
@@ -40,7 +41,21 @@
                 </tr>
                 <tr>
                     <td>
-                        <h3>[ Your Blog ]</h3>
+                        <h3>[ <?php echo $channel->getName(); ?> ]</h3>
+                        <textarea rows="5" cols="70" disabled>CRIADO POR: <?php echo $channel->getOwnerName(); ?>. DESCRICAO: <?php echo $channel->getDescription(); ?></textarea>
+                        <?php if ($channel->getOwner() == $userId): ?>
+                            <form action="channel_addUser.php" method="post">
+                                <input type="hidden" name="channel_id" value="<?php echo $_GET['id']; ?>">
+                                <input type="text" name="user_name">
+                                <button type="submit">add</button>
+                            </form>
+                            <form action="channel_delUser.php" method="post">
+                                <input type="hidden" name="channel_id" value="<?php echo $_GET['id']; ?>">
+                                <input type="text" name="user_name">
+                                <button type="submit">Remove</button>
+                            </form>
+                        <?php endif; ?>
+                        <hr>
                             <?php foreach($posts as $post): ?>
                                 <center>
                                     <table>
@@ -48,7 +63,10 @@
                                             <form action="post_edit.php" method="post">
                                             <tr>
                                                 <td colspan="2">
+                                                    <?php if ($channel->getOwner() == $userId || $post->getUserId() == $userId): ?>
                                                     <input type="hidden" name="id" value="<?php echo $post->getId(); ?>">
+                                                    <input type="hidden" name="channel_id" value="<?php echo $_GET['id']; ?>">
+                                                    <?php endif; ?>
                                                     <textarea name="title" cols="25" rows="1"><?php echo $post->getTitle(); ?></textarea>
                                                 </td>
                                                 <td>
@@ -58,8 +76,10 @@
                                                     <?php echo $post->getDate(); ?>
                                                 </td>
                                                 <td>
+                                                    <?php if ($channel->getOwner() == $userId || $post->getUserId() == $userId): ?>
                                                     <button type="submit" name="editPost">Update</button>
                                                     <button type="submit" name="deletePost">Delete</button>      
+                                                    <?php endif; ?>
                                                 </td>
                                             </tr>
                                             <tr>
