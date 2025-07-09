@@ -53,6 +53,7 @@
                                     <th>Name</th>
                                     <th>Description</th>
                                     <th>Admin/Owner</th>
+                                    <th>Action</th>
                                 </thead>
                                 <tbody>
                                     <?php foreach($channels as $channel): ?>
@@ -69,6 +70,17 @@
                                         </td>
                                         <td>
                                             <?php echo $channel->getOwnerName(); ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($channel->getOwnerName() == $user) { ?>
+                                            <a href="channel_del.php?id=<?php echo $channel->getId(); ?>">
+                                                <button type="button">delete</button>
+                                            </a>
+                                            <?php } else { ?>
+                                            <a href="channel_delUser.php?user=<?php echo $user; ?>&channel=<?php echo $channel->getId(); ?>">
+                                                <button type="button">Quit</button>
+                                            </a>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <?php endforeach;  ?>

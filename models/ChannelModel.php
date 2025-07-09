@@ -4,6 +4,7 @@ namespace Model;
 
 use Model\VO\Channel_userVO;
 use Model\VO\ChannelVO;
+use Model\VO\UserVO;
 
 final class ChannelModel {
 
@@ -80,6 +81,29 @@ final class ChannelModel {
         $db->execute($query, [':id' => $vo->getId()]);
     }
 
+    public function selectUsersInChannel($vo) {
+        $db = new Database();
+        $query = "SELECT u.user_name
+                    FROM channel_user AS cu
+                    JOIN users AS u
+                    ON u.id = cu.user_id
+                    WHERE cu.channel_id = :channel_id";
+        
+        $data = $db->select($query, [
+            ':channel_id' => $vo->getId()
+        ]);
+
+        $arrayDados = [];
+        foreach ($data as $row) {
+            array_push($arrayDados, new UserVO(
+                '', 
+                $row['user_name'], 
+            ));
+        }
+
+        return $arrayDados;
+    }
+
     public function isUserInChannel($vo) {
         $db = new Database();
         $query = "SELECT * FROM channel_user WHERE channel_id = :channel_id AND user_id = :user_id";
@@ -123,7 +147,7 @@ final class ChannelModel {
     
     public function lastId() {
         $db = new Database();
-        $query = "SELECT count(id) FROM channels";
+        $query = "SELECT id FROM channels ORDER BY id DESC LIMIT 1";
         $data =$db->select($query);
         return $data[0][0];
     }

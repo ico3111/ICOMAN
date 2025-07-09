@@ -42,18 +42,22 @@
                 <tr>
                     <td>
                         <h3>[ <?php echo $channel->getName(); ?> ]</h3>
-                        <textarea rows="5" cols="70" disabled>CRIADO POR: <?php echo $channel->getOwnerName(); ?>. DESCRICAO: <?php echo $channel->getDescription(); ?></textarea>
+                        <textarea rows="5" cols="70" disabled>CRIADO POR: <?php echo $channel->getOwnerName(); ?>. DESCRICAO: <?php echo $channel->getDescription(); ?>. USUARIOS: <?php foreach ($users as $user) { echo $user->getUserName(). ', '; } ?>.
+                        </textarea>
                         <?php if ($channel->getOwner() == $userId): ?>
-                            <form action="channel_addUser.php" method="post">
-                                <input type="hidden" name="channel_id" value="<?php echo $_GET['id']; ?>">
-                                <input type="text" name="user_name">
-                                <button type="submit">add</button>
-                            </form>
-                            <form action="channel_delUser.php" method="post">
-                                <input type="hidden" name="channel_id" value="<?php echo $_GET['id']; ?>">
-                                <input type="text" name="user_name">
-                                <button type="submit">Remove</button>
-                            </form>
+                            <br><br>
+                            <div style="display: flex; justify-content: center;">
+                                <form action="channel_addUser.php" method="post">
+                                    <input type="hidden" name="channel_id" value="<?php echo $_GET['id']; ?>">
+                                    <input type="text" name="user_name">
+                                    <button type="submit">add</button>
+                                </form>
+                                <form action="channel_delUser.php" method="post">
+                                    <input type="hidden" name="channel_id" value="<?php echo $_GET['id']; ?>">
+                                    <input type="text" name="user_name">
+                                    <button type="submit">Remove</button>
+                                </form>
+                            </div>
                         <?php endif; ?>
                         <hr>
                             <?php foreach($posts as $post): ?>
@@ -76,10 +80,14 @@
                                                     <?php echo $post->getDate(); ?>
                                                 </td>
                                                 <td>
-                                                    <?php if ($channel->getOwner() == $userId || $post->getUserId() == $userId): ?>
-                                                    <button type="submit" name="editPost">Update</button>
-                                                    <button type="submit" name="deletePost">Delete</button>      
-                                                    <?php endif; ?>
+                                                    <?php if ($channel->getOwner() == $userId && $post->getUserId() != $userId) { ?>
+                                                        <button type="submit" name="deletePost">Delete</button>      
+                                                    <?php } ?>
+
+                                                    <?php if ($post->getUserId() == $userId) { ?>
+                                                        <button type="submit" name="editPost">Update</button>
+                                                        <button type="submit" name="deletePost">Delete</button>
+                                                    <?php } ?>
                                                 </td>
                                             </tr>
                                             <tr>

@@ -37,9 +37,12 @@ final class PostController extends Controller {
             )->getUsername()
         );
 
+        $users = $channelModel->selectUsersInChannel(new ChannelVO($_GET['id']));
+
         $this->loadView('posts', [
             'posts' => $data,
             'channel' => $channel,
+            'users' => $users,
             'userId' => $this->getUserId()
         ]);
     }
