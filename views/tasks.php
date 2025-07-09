@@ -25,10 +25,7 @@
                                             <td>
                                             <table>
                                                     <tr>
-                                                        <td>
-                                                            <input type="hidden" name="board_id" value="<?php echo $_GET['id']; ?>">
-                                                            <input type="checkbox" name="isChecked">
-                                                        </td>
+                                                        <td><input type="checkbox" name="isChecked"></td>
                                                         <td><input type="text" name="title"></td>
                                                         <td><textarea name="description" cols="30" rows="1"></textarea></td>
                                                         <td><input type="date" name="deadline"></td>
@@ -50,25 +47,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <h3>[ <?php echo $board->getName(); ?> ]</h3>
-                        <textarea rows="5" cols="70" disabled>CRIADO POR: <?php echo $board->getOwnerName(); ?>. DESCRICAO: <?php echo $board->getDescription(); ?>. USUARIOS: <?php foreach ($users as $user) { echo $user->getUserName(). ', '; } ?>.
-                        </textarea>
-                        <?php if ($board->getOwner() == $userId): ?>
-                            <br><br>
-                            <div style="display: flex; justify-content: center;">
-                                <form action="board_addUser.php" method="post">
-                                    <input type="hidden" name="board_id" value="<?php echo $_GET['id']; ?>">
-                                    <input type="text" name="user_name">
-                                    <button type="submit">add</button>
-                                </form>
-                                <form action="board_delUser.php" method="post">
-                                    <input type="hidden" name="board_id" value="<?php echo $_GET['id']; ?>">
-                                    <input type="text" name="user_name">
-                                    <button type="submit">Remove</button>
-                                </form>
-                            </div>
-                        <?php endif; ?>
-                        <hr>
+                        <h3>[Your Tasks]</h3>
                         <center>
                             <table width="100%">
                                 <thead>
@@ -86,7 +65,7 @@
                                         <form action="task_edit.php" method="POST">
                                             <td>                                                            
                                                 <input type="hidden" name="id" value="<?php echo $task->getId(); ?>">
-                                                <input type="hidden" name="board_id" value="<?php echo $task->getBoardId(); ?>">
+                                                <input type="hidden" name="user_id" value="<?php echo $task->getUserId(); ?>">
                                                 <input type="checkbox" name="isChecked" <?php echo $task->getIsChecked() == 'on' ? 'checked' : '' ?>>
                                             </td>
                                             <td>

@@ -8,8 +8,8 @@ final class TaskModel extends Model {
 
     public function selectAll($vo) {
         $db = new Database();
-        $query = "SELECT * FROM tasks WHERE board_id = :id ORDER BY task_deadline ASC";
-        $data = $db->select($query,  [':id' => $vo->getBoardId()]);
+        $query = "SELECT * FROM tasks WHERE user_id = :user_id ORDER BY task_deadline ASC";
+        $data = $db->select($query,  [':user_id' => $vo->getId()]);
 
         $arrayDados = [];
         
@@ -20,7 +20,6 @@ final class TaskModel extends Model {
                 $row['task_description'], 
                 $row['task_deadline'], 
                 $row['user_id'],
-                $row['board_id'],
                 $row['is_checked']
             ));
         }
@@ -39,20 +38,17 @@ final class TaskModel extends Model {
                               task_description, 
                               task_deadline, 
                               user_id, 
-                              board_id, 
                               is_checked) 
                        VALUES (:task_title, 
                               :task_description, 
                               :task_deadline, 
                               :user_id, 
-                              :board_id, 
                               :is_checked)";
         $binds = [
             ':task_title' => $vo->getTitle(), 
             ':task_description' => $vo->getDescription(), 
             ':task_deadline' => $vo->getDeadline(), 
             ':user_id' => $vo->getUserId(),
-            ':board_id' => $vo->getBoardId(),
             ':is_checked' => $vo->getIsChecked()
         ];
      

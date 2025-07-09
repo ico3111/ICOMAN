@@ -22,7 +22,6 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <input type="hidden" name="channel_id" value="<?php echo $_GET['id']; ?>">
                                             <input type="text" name="title" placeholder="Title" required>
                                         </td>
                                         <td rowspan="2">
@@ -41,37 +40,14 @@
                 </tr>
                 <tr>
                     <td>
-                        <h3>[ <?php echo $channel->getName(); ?> ]</h3>
-                        <textarea rows="5" cols="70" disabled>CRIADO POR: <?php echo $channel->getOwnerName(); ?>. DESCRICAO: <?php echo $channel->getDescription(); ?>. USUARIOS: <?php foreach ($users as $user) { echo $user->getUserName(). ', '; } ?>.
-                        </textarea>
-                        <?php if ($channel->getOwner() == $userId): ?>
-                            <br><br>
-                            <div style="display: flex; justify-content: center;">
-                                <form action="channel_addUser.php" method="post">
-                                    <input type="hidden" name="channel_id" value="<?php echo $_GET['id']; ?>">
-                                    <input type="text" name="user_name">
-                                    <button type="submit">add</button>
-                                </form>
-                                <form action="channel_delUser.php" method="post">
-                                    <input type="hidden" name="channel_id" value="<?php echo $_GET['id']; ?>">
-                                    <input type="text" name="user_name">
-                                    <button type="submit">Remove</button>
-                                </form>
-                            </div>
-                        <?php endif; ?>
-                        <hr>
+                        <h3>[ Your Blog ]</h3>
                             <?php foreach($posts as $post): ?>
                                 <center>
                                     <table>
                                         <tbody>
-                                            <form action="post_edit.php" method="post">
                                             <tr>
                                                 <td colspan="2">
-                                                    <?php if ($channel->getOwner() == $userId || $post->getUserId() == $userId): ?>
-                                                    <input type="hidden" name="id" value="<?php echo $post->getId(); ?>">
-                                                    <input type="hidden" name="channel_id" value="<?php echo $_GET['id']; ?>">
-                                                    <?php endif; ?>
-                                                    <textarea name="title" cols="25" rows="1"><?php echo $post->getTitle(); ?></textarea>
+                                                    <?php echo $post->getTitle(); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $post->getUserName(); ?>
@@ -80,24 +56,18 @@
                                                     <?php echo $post->getDate(); ?>
                                                 </td>
                                                 <td>
-                                                    <?php if ($channel->getOwner() == $userId && $post->getUserId() != $userId) { ?>
-                                                        <button type="submit" name="deletePost">Delete</button>      
-                                                    <?php } ?>
-
-                                                    <?php if ($post->getUserId() == $userId) { ?>
-                                                        <button type="submit" name="editPost">Update</button>
-                                                        <button type="submit" name="deletePost">Delete</button>
-                                                    <?php } ?>
+                                                    <a href="post_del.php?id=<?php echo $post->getId(); ?>">
+                                                        <button type="button"> Delete</button>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="5">
                                                     <center>
-                                                        <textarea name="content" rows="5" cols="70"><?php echo $post->getContent();?></textarea>
+                                                        <textarea style="background-color: white; color: black;" rows="5" cols="70" disabled><?php echo $post->getContent();?></textarea>
                                                     </center>
                                                 </td>
                                             </tr>
-                                            </form>
                                         </tbody>
                                     </table>
                                 </center>

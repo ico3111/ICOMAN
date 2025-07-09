@@ -38,7 +38,7 @@
         <tbody style="border: 1px solid #3b5998">
             <tr>
                 <td style="background-color: #3b5998; color: white">
-                    Welcome to SPOT (Study and Plan - Organization Tool)
+                    Welcome to StudyHub
                 </td>
             </tr>
             <tr>
@@ -46,12 +46,12 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td style="padding-left: 15px;">
+                                <td style=" padding-left: 15px;">
                                     <br>
                                     <center>
-                                        <h1 style="font-size: large;">[ Welcome to SPOT ]</h1>
+                                        <h1 style="font-size: large;">[ Welcome to StudyHub ]</h1>
                                     </center>
-                                    <p>O SPOT é um projeto pessoal com finalidade de uso próprio. O programa serve um centro organizacional e aconchegante com as ferramentas necessárias para proporcionar um ambiente agradável para estudar.</p>
+                                    <p>O StudyHub é um projeto pessoal com finalidade de uso próprio. O programa serve para proporcionar um centro aconchegante com as ferramentas necessárias para proporcionar um ambiente agradável para estudar.</p>
                                     <p>Se você é um hacker ou um bot, plis, não exploda o meu site, ainda estou aprendendo.</p>
                                     <p>O que você pode encontrar por aqui: 
                                         <br>
