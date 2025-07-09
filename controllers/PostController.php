@@ -64,7 +64,7 @@ final class PostController extends Controller {
 
     public function updatePost() {
         if (isset($_POST['deletePost'])) { $this->redirect('post_del.php?id='.$_POST['id'].'&channel_id='.$_POST['channel_id']); }
-        if (empty($_POST['title']) || empty($_POST['content'])) { $this->redirect('posts.php?message=Preencha os campos obrigatorios.'); }
+        if (empty($_POST['title']) || empty($_POST['content'])) { $this->redirect('posts.php?id='.$_POST['id'].'&message=Preencha os campos obrigatorios.'); }
         
         date_default_timezone_set('America/Sao_Paulo');
         $model = new PostModel();
