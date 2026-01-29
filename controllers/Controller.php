@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+require_once __DIR__ . './../config.php';
+
 abstract class Controller {
 
     public function redirect($url) {

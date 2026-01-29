@@ -37,7 +37,7 @@
             <tr>
                 <td colspan="2">
                     <center>
-                        <p>&copy; 2025 All rights Reserved.</p>
+                        <p>&copy; 2025 All rights Reserved. Version <?php echo APP_VERSION; ?></p>
                     </center>
                 </td>
             </tr>
