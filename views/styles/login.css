@@ -1,0 +1,50 @@
+main {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.aboutContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+  min-width: 300px;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: #f3f3f3;
+}
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 30%;
+  min-width: 200px;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 5px;
+  background-color: #f3f3f3;
+}
+
+.aboutContainer ul {
+  list-style: inside;
+}
+
+.loginContainer form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+  background-color: aqua;
+}
+
+.loginContainer form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

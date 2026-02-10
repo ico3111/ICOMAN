@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#Navbar {
+  font-family: "Courier Prime", monospace;
+  position: sticky;
+  min-height: 6vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f3f3f3;
+  border-bottom: 1px solid black;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+#mainNavbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+#mainNavbar > ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  list-style: none;
+  gap: 20px;
+}
+
+#mainNavbar .navbarItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-left: 2px solid black;
+  height: 100%;
+}
+
+#mainNavbar .navbarItem:hover {
+  background-color: #8fe7ff;
+}
+
+.input {
+  padding: 5px 2px;
+  background-color: #e2e2e2;
+  font-size: larger;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+.updateButton {
+  padding: 5px;
+  background-color: #ddff00;
+  font-size: larger;
+  border: 1px solid #aaba00;
+  border-radius: 8px;
+}
+.updateButton:hover {
+  background-color: #aaba00;
+}
+
+.deleteButton {
+  padding: 5px;
+  background-color: #ff0000;
+  font-size: larger;
+  border: 1px solid #ba0000;
+  border-radius: 8px;
+}
+.deleteButton:hover {
+  background-color: #ba0000;
+}
+
+.resetButton {
+  padding: 5px;
+  background-color: #00c8ff;
+  font-size: larger;
+  border: 1px solid #0065bd;
+  border-radius: 8px;
+}
+.resetButton:hover {
+  background-color: #0065bd;
+}
+
+.submitButton {
+  padding: 5px;
+  background-color: #51ff00;
+  font-size: larger;
+  border: 1px solid #00d900;
+  border-radius: 8px;
+}
+.submitButton:hover {
+  background-color: #00d900;
+}
