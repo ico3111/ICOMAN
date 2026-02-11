@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-require_once __DIR__ . './../config.php';
+require_once __DIR__ . '/../config.php';
 
 abstract class Controller {
 
