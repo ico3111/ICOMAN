@@ -1,0 +1,158 @@
+.loginCards {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.aboutContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+  min-width: 300px;
+  font-size: large;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px;
+  padding-bottom: 30px;
+  background-color: #212121;
+}
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 30%;
+  min-width: 350px;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px;
+  padding-bottom: 30px;
+  background-color: #212121;
+}
+
+@media only screen and (max-width: 750px) {
+  .aboutContainer {
+    width: 90%;
+  }
+  .loginContainer {
+    width: 90%;
+  }
+}
+
+.aboutContainer ul {
+  list-style: inside;
+}
+
+.loginContainer form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.loginTitle {
+  font-size: 30px;
+}
+
+.loginContainer .formSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+/*   HOME   */
+
+.homeCards {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.homeMusics {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 40%;
+  min-width: 300px;
+  padding: 10px;
+  padding-bottom: 30px;
+  font-size: large;
+  background-color: #212121;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.homeMusics > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.homeMusics .musicItem {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.musicItem > div {
+  width: 30%;
+}
+
+.musicItem > audio {
+  width: 70%;
+}
+
+/*  TIMERS  */
+
+.homeTimers {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 40%;
+  min-width: 300px;
+  padding: 10px;
+  padding-bottom: 30px;
+  font-size: large;
+  background-color: #212121;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.homeTimers > div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.timerInput {
+  width: 20px;
+}
+
+.timerDiv,
+.cronometroDiv {
+  border: 1px solid white;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.timerDiv > table,
+.cronometroDiv > table {
+  width: 250px;
+}

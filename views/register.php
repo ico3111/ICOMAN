@@ -3,75 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="views/styles/base5.css">
+    <link rel="stylesheet" href="views/styles/base.css">
+    <link rel="stylesheet" href="views/styles/style.css">
     <title>Register</title>
 </head>
 <body>
 
 <?php include_once('views/templates/pageHeader.php'); ?>
-
-<td valign="top" style="padding: 3px;">
-    <center>
-        <?php echo !empty($message) || !empty($error) ?? '<p color="#fdfd96">'. ($message.$error) .'</p>'; ?>
-        <form style="border: 1px dashed #3b5998" action="doRegister.php" method="POST">
-            Username<br>
-            <input type="text" name="login" minlength="3">
-            <br>
-            Password<br>
-            <input type="password" name="password" minlength="3">
-            <br>
-            Confirm Password<br>
-            <input type="password" name="confirm_password" minlength="3">
-            <br>
-            Admin Password<br>
-            <input type="password" name="admin_password" minlength="3">
-            <br><br>
-            <button class="btn" type="reset">reset</button>&nbsp;&nbsp;
-            <button class="btn" type="submit" name="register">register</button>&nbsp;
-        </form>
-        <br>
-        <a href="login.php">Click here to login!</a>
-    </center>
-</td>
-<td width="60%" style="padding: 3px;">
-    <table>
-        <tbody style="border: 1px solid #3b5998">
-            <tr>
-                <td style="background-color: #3b5998; color: white">
-                    Welcome to <?php echo APP_NAME; ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td style="padding-left: 15px;">
-                                    <br>
-                                    <center>
-                                        <h1 style="font-size: large;">[ Welcome to <?php echo APP_NAME; ?> ]</h1>
-                                    </center>
-                                    <p>O <?php echo APP_NAME; ?> é um projeto pessoal com finalidade de uso próprio. O programa serve um centro organizacional e aconchegante com as ferramentas necessárias para proporcionar um ambiente agradável para estudar.</p>
-                                    <p>Se você é um hacker ou um bot, plis, não exploda o meu site, ainda estou aprendendo.</p>
-                                    <p>O que você pode encontrar por aqui: 
-                                        <br>
-                                        <b>•</b> Timers e cronômetros para controlar o tempo de estudo<br>
-                                        <b>•</b> Músicas para estudar<br>
-                                        <b>•</b> Blog diário<br>
-                                        <b>•</b> Quadro de tarefas<br>
-                                        <b>•</b> Gerenciador de hábitos<br>
-                                    </p>
-                                    <p>Para começar, faça login.</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>       
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</td>
- 
-<?php include_once('views/templates/pageFooter.php'); ?>
+<main class="pageContainer">
+    <div class="loginCards">
+        <div class="loginContainer">
+            <h2 class="loginTitle">[Register]</h2>
+            <form action="doRegister.php" method="POST">   
+                <div class="formSection">
+                    <label for="login" class="label">Username: </label>
+                    <input type="text" name="login" minlength="3" class="input">
+                </div>
+                <div class="formSection">
+                    <label for="password" class="label">Password: </label>
+                    <input type="password" name="password" minlength="3" class="input">
+                </div>
+                <div class="formSection">
+                    <label for="confirm_password" class="label">Confirm Password: </label>
+                    <input type="password" name="confirm_password" minlength="3" class="input">
+                </div>
+                <div class="formSection">
+                    <label for="password" class="label">Admin Password: </label>
+                    <input type="password" name="admin_password" minlength="3" class="input">
+                </div>
+                <div class="buttons">
+                    <a href="login.php">Click here to login!</a>
+                    <div>
+                        <button class="resetButton" type="reset">Reset</button>
+                        <button class="submitButton" type="submit">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="aboutContainer">
+            <h2>[About]</h2>
+            <div>
+                <p>O <?php echo APP_NAME; ?> é um projeto pessoal com finalidade de uso próprio. O programa serve um centro organizacional e aconchegante com as ferramentas necessárias para proporcionar um ambiente agradável para estudar.</p>
+                <p>Se você é um hacker ou um bot, plis, não exploda o meu site, ainda estou aprendendo.</p>
+                <p>O que você pode encontrar por aqui: </p>
+                <ul>
+                    <li>Timers e cronômetros para controlar o tempo de estudo</li>
+                    <li>Músicas para estudar</li>
+                    <li>Blog diário</li>
+                    <li>Quadro de tarefas</li>
+                    <li>Gerenciador de hábitos</li>
+                </ul>
+                <p>Para começar, faça login.</p>
+            </div>
+        </div>
+    </div>
+</main>
 </body>
 </html>

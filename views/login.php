@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="views/styles/base.css">
-    <link rel="stylesheet" href="views/styles/login.css">
+    <link rel="stylesheet" href="views/styles/style.css">
     <title>Login</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
 <main class="pageContainer">
     <div class="loginCards">
         <div class="aboutContainer">
-        <h2>About</h2>
+        <h2>[About]</h2>
         <div>
             <p>O <?php echo APP_NAME; ?> é um projeto pessoal com finalidade de uso próprio. O programa serve um centro organizacional e aconchegante com as ferramentas necessárias para proporcionar um ambiente agradável para estudar.</p>
             <p>Se você é um hacker ou um bot, plis, não exploda o meu site, ainda estou aprendendo.</p>
@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="loginContainer">
-        <h2 class="loginTitle">Login</h2>
+        <h2 class="loginTitle">[Login]</h2>
         <form action="doLogin.php" method="POST">   
             <div class="formSection">
                 <label for="login" class="label">Username: </label>

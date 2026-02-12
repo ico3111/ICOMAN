@@ -94,7 +94,6 @@ body {
 .deleteButton {
   padding: 5px;
   background-color: #ff0000;
-  font-size: larger;
   border: 1px solid #ba0000;
   border-radius: 8px;
 }
@@ -122,4 +121,8 @@ body {
 }
 .submitButton:hover {
   background-color: #00d900;
+}
+.center {
+  display: flex;
+  justify-content: center;
 }
