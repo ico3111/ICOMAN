@@ -65,5 +65,4 @@ final class PostModel {
         $query = "DELETE FROM posts WHERE id = :id";
         $db->execute($query, [':id' => $vo->getId()]);
     }
-
 }
