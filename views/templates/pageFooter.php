@@ -10,22 +10,33 @@
                             </select>
                             &nbsp;
                             <select id="selectImage" name="themeImage">
-                                <option value="none" <?php echo empty($_COOKIE['preferences-image']) || $_COOKIE['preferences-image'] == "none" ? 'selected' : ''; ?>>Background Image (none)</option>
-                                <option value="media/backgrounds/1.jpg" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/1.jpg" ? 'selected' : ''; ?>>Image 1</option>
-                                <option value="media/backgrounds/2.jpg" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/2.jpg" ? 'selected' : ''; ?>>Image 2</option>
-                                <option value="media/backgrounds/3.jpg" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/3.jpg" ? 'selected' : ''; ?>>Image 3</option>
-                                <option value="media/backgrounds/4.jpg" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/4.jpg" ? 'selected' : ''; ?>>Image 4</option>
-                                <option value="media/backgrounds/5.jpg" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/5.jpg" ? 'selected' : ''; ?>>Image 5</option>
-                                <option value="media/backgrounds/6.jpg" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/6.jpg" ? 'selected' : ''; ?>>Image 6</option>
-                                <option value="media/backgrounds/7.jpg" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/7.jpg" ? 'selected' : ''; ?>>Image 7</option>
-                                <option value="media/backgrounds/8.jpg" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/8.jpg" ? 'selected' : ''; ?>>Image 8</option>
-                                <option value="media/backgrounds/9.jpg" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/9.jpg" ? 'selected' : ''; ?>>Image 9</option>
-                                <option value="media/backgrounds/10.jpg" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/10.jpg" ? 'selected' : ''; ?>>Image 10</option>
-                                <option value="media/backgrounds/11.jpg" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/11.jpg" ? 'selected' : ''; ?>>Image 11</option>
-                                <option value="media/backgrounds/p1.png" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/p1.png" ? 'selected' : ''; ?>>Image 12</option>
-                                <option value="media/backgrounds/p2.png" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/p2.png" ? 'selected' : ''; ?>>Image 13</option>
-                                <option value="media/backgrounds/p3.png" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/p3.png" ? 'selected' : ''; ?>>Image 14</option>
-                                <option value="media/backgrounds/p4.png" <?php echo ($_COOKIE['preferences-image'] ?? '') == "media/backgrounds/p4.png" ? 'selected' : ''; ?>>Image 15</option>
+                                <?php
+                                    $currentImage = $_COOKIE['preferences-image'] ?? 'none';
+
+                                    $images = [
+                                        'none' => 'Background Image (none)',
+                                        'media/backgrounds/1.jpg' => 'Image 1',
+                                        'media/backgrounds/2.jpg' => 'Image 2',
+                                        'media/backgrounds/3.jpg' => 'Image 3',
+                                        'media/backgrounds/4.jpg' => 'Image 4',
+                                        'media/backgrounds/5.jpg' => 'Image 5',
+                                        'media/backgrounds/6.jpg' => 'Image 6',
+                                        'media/backgrounds/7.jpg' => 'Image 7',
+                                        'media/backgrounds/8.jpg' => 'Image 8',
+                                        'media/backgrounds/9.jpg' => 'Image 9',
+                                        'media/backgrounds/10.jpg' => 'Image 10',
+                                        'media/backgrounds/11.jpg' => 'Image 11',
+                                        'media/backgrounds/p1.png' => 'Image 12',
+                                        'media/backgrounds/p2.png' => 'Image 13',
+                                        'media/backgrounds/p3.png' => 'Image 14',
+                                        'media/backgrounds/p4.png' => 'Image 15',
+                                    ];
+
+                                    foreach ($images as $value => $label) {
+                                        $selected = $currentImage === $value ? 'selected' : '';
+                                        echo "<option value=\"$value\" $selected>$label</option>"; 
+                                    }
+                                ?>
                             </select>
                             &nbsp;
                             <button type="submit">Define</button>

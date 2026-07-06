@@ -2,19 +2,22 @@
 
 namespace Model;
 
-use Model\VO\taskVO;
+use Model\VO\TaskVO;
 
 final class TaskModel extends Model {
 
     public function selectAll($vo) {
         $db = new Database();
-        $query = "SELECT * FROM tasks WHERE board_id = :id ORDER BY task_deadline ASC";
-        $data = $db->select($query,  [':id' => $vo->getBoardId()]);
+        $query = "SELECT id, task_title, task_description, task_deadline, user_id, board_id, is_checked
+                    FROM tasks
+                   WHERE board_id = :id
+                ORDER BY task_deadline ASC";
+
+        $data = $db->select($query, [':id' => $vo->getBoardId()]);
 
         $arrayDados = [];
-        
         foreach ($data as $row) {
-            array_push($arrayDados, new TaskVO (
+            array_push($arrayDados, new TaskVO(
                 $row['id'], 
                 $row['task_title'], 
                 $row['task_description'], 
@@ -34,19 +37,10 @@ final class TaskModel extends Model {
     
     public function insert($vo) {
         $db = new Database();
-        $query = "INSERT INTO tasks (
-                              task_title, 
-                              task_description, 
-                              task_deadline, 
-                              user_id, 
-                              board_id, 
-                              is_checked) 
-                       VALUES (:task_title, 
-                              :task_description, 
-                              :task_deadline, 
-                              :user_id, 
-                              :board_id, 
-                              :is_checked)";
+        $query = "INSERT 
+                    INTO tasks(task_title, task_description, task_deadline, user_id, board_id, is_checked) 
+                  VALUES (:task_title, :task_description, :task_deadline, :user_id, :board_id, :is_checked)";
+        
         $binds = [
             ':task_title' => $vo->getTitle(), 
             ':task_description' => $vo->getDescription(), 
@@ -67,6 +61,7 @@ final class TaskModel extends Model {
                          task_deadline = :task_deadline, 
                          is_checked = :is_checked 
                    WHERE id = :id";
+
         $binds = [
             ':task_title' => $vo->getTitle(), 
             ':task_description' => $vo->getDescription(), 
@@ -76,11 +71,13 @@ final class TaskModel extends Model {
         ];
         
         $db->execute($query, $binds);
-        
     }
     
     public function delete($vo) {
         $db = new Database();
-        $db->execute("DELETE FROM tasks WHERE id = :id", [':id' => $vo->getId()]);
+        $query = "DELETE FROM tasks WHERE id = :id";
+
+        $db->execute($query, [':id' => $vo->getId()]);
     }
+    
 }

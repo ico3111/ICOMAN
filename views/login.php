@@ -7,8 +7,11 @@
     <title>Login</title>
 </head>
 <body>
+<?php 
+    include_once('views/templates/pageHeader.php');
+    include_once('config.php');
+?>
 
-<?php include_once('views/templates/pageHeader.php'); ?>
 <td valign="top" style="padding: 3px;">
     <center>
         <form style="border: 1px dashed #3b5998" action="doLogin.php" method="POST">
@@ -19,7 +22,7 @@
             <input type="password" name="password" minlength="3">
             <br><br>
             <button class="btn" type="reset">reset</button>&nbsp;&nbsp;
-            <button class="btn" type="submit">login</button>&nbsp;&nbsp;
+            <button class="btn" type="submit">login</button>&nbsp;&nbsp; 
         </form>
         <br>
         <a href="register.php">Click here to register!</a>
@@ -62,8 +65,8 @@
             </tr>
         </tbody>
     </table>
-</td>
-         
+</td> 
+
 <?php include_once('views/templates/pageFooter.php'); ?>
 </body>
 </html>

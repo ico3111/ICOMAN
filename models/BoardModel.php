@@ -9,12 +9,13 @@ use Model\VO\UserVO;
 final class BoardModel {
 
     public function selectAll($vo) {
-        $db = new Database();
-        $query = "SELECT c.id, c.board_name, c.board_description, c.board_owner
-                    FROM boards AS c
-                    JOIN board_user AS cu
-                      ON c.id = cu.board_id
-                   WHERE cu.user_id = :id";
+        $db = new Database();     
+        $query = "SELECT boards.id, boards.board_name, boards.board_description, boards.board_owner
+                    FROM boards
+                    JOIN board_user
+                      ON boards.id = board_user.board_id
+                   WHERE board_user.user_id = :id";
+
         $data = $db->select($query, [':id' => $vo->getId()]);
 
         $arrayDados = [];
@@ -32,22 +33,28 @@ final class BoardModel {
 
     public function selectOne($vo) {
         $db = new Database();
-        $query = "SELECT c.id, c.board_name, c.board_description, c.board_owner
-                    FROM boards AS c
-                   WHERE c.id = :id";
+        $query = "SELECT boards.id, boards.board_name, boards.board_description, boards.board_owner
+                    FROM boards
+                   WHERE boards.id = :id";
+
         $data = $db->select($query, [':id' => $vo->getId()]);
 
-        return new BoardVO(
+        $board = new BoardVO(
             $data[0]['id'], 
             $data[0]['board_name'], 
             $data[0]['board_description'], 
             $data[0]['board_owner']
         );
+
+        return $board;
     }
 
     public function insert($vo) {
         $db = new Database();
-        $query = "INSERT INTO boards(board_name, board_description, board_owner) VALUES (:board_name, :board_description, :board_owner)";
+        $query = "INSERT 
+                    INTO boards(board_name, board_description, board_owner) 
+                  VALUES (:board_name, :board_description, :board_owner)";
+        
         $binds = [
             ':board_name' => $vo->getName(), 
             ':board_description' => $vo->getDescription(), 
@@ -64,6 +71,7 @@ final class BoardModel {
                          board_description = :board_description, 
                          board_owner = :board_owner
                    WHERE id = :id";
+
         $binds = [
             ':board_name' => $vo->getName(), 
             ':board_description' => $vo->getDescription(), 
@@ -72,26 +80,24 @@ final class BoardModel {
         ];
         
         $db->execute($query, $binds);
-        
     }
 
     public function delete($vo) {
         $db = new Database();
         $query = "DELETE FROM boards WHERE id = :id";
+
         $db->execute($query, [':id' => $vo->getId()]);
     }
 
     public function selectUsersInBoard($vo) {
         $db = new Database();
-        $query = "SELECT u.user_name
-                    FROM board_user AS cu
-                    JOIN users AS u
-                    ON u.id = cu.user_id
-                    WHERE cu.board_id = :board_id";
+        $query = "SELECT board_user.user_name
+                    FROM board_user
+                    JOIN users
+                      ON users.id = board_user.user_id
+                   WHERE board_user.board_id = :board_id";
         
-        $data = $db->select($query, [
-            ':board_id' => $vo->getId()
-        ]);
+        $data = $db->select($query, [':board_id' => $vo->getId()]);
 
         $arrayDados = [];
         foreach ($data as $row) {
@@ -106,7 +112,11 @@ final class BoardModel {
 
     public function isUserInBoard($vo) {
         $db = new Database();
-        $query = "SELECT * FROM board_user WHERE board_id = :board_id AND user_id = :user_id";
+        $query = "SELECT * 
+                    FROM board_user 
+                   WHERE board_id = :board_id 
+                     AND user_id = :user_id";
+
         $data = $db->select($query, [
             ':board_id' => $vo->getBoardId(), 
             ':user_id' => $vo->getUserId()
@@ -125,7 +135,10 @@ final class BoardModel {
 
     public function addUserToBoard($vo) {
         $db = new Database();
-        $query = "INSERT INTO board_user(board_id, user_id) VALUES (:board_id, :user_id)";
+        $query = "INSERT 
+                    INTO board_user(board_id, user_id) 
+                  VALUES (:board_id, :user_id)";
+
         $binds = [
             ':board_id' => $vo->getBoardId(), 
             ':user_id' => $vo->getUserId()
@@ -136,7 +149,11 @@ final class BoardModel {
 
     public function deleteUserFromBoard($vo) {
         $db = new Database();
-        $query = "DELETE FROM board_user WHERE board_id = :board_id AND user_id = :user_id";
+        $query = "DELETE 
+                    FROM board_user 
+                   WHERE board_id = :board_id 
+                     AND user_id = :user_id";
+
         $binds = [
             ':board_id' => $vo->getBoardId(), 
             ':user_id' => $vo->getUserId()
@@ -147,8 +164,11 @@ final class BoardModel {
     
     public function lastId() {
         $db = new Database();
-        $query = "SELECT id FROM boards ORDER BY id DESC LIMIT 1";
+        $query = "SELECT id 
+                    FROM boards 
+                   ORDER BY id DESC LIMIT 1";
         $data =$db->select($query);
         return $data[0][0];
     }
+    
 }

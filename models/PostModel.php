@@ -8,7 +8,10 @@ final class PostModel {
 
     public function selectAll($vo) {
         $db = new Database();
-        $query = "SELECT * FROM posts WHERE channel_id = :id";
+        $query = "SELECT id, post_title, post_content, post_date, user_id, channel_id, user_name
+                    FROM posts
+                   WHERE channel_id = :id";
+
         $data = $db->select($query, [':id' => $vo->getChannelId()]);
 
         $arrayDados = [];
@@ -29,14 +32,17 @@ final class PostModel {
 
     public function insert($vo) {
         $db = new Database();
-        $query = "INSERT INTO posts(post_title, post_content, post_date, user_id, channel_id, user_name) VALUES (:post_title, :post_content, :post_date, :user_id, :channel_id, :user_name)";
+        $query = "INSERT 
+                    INTO posts(post_title, post_content, post_date, user_id, channel_id, user_name) 
+                  VALUES (:post_title, :post_content, :post_date, :user_id, :channel_id, :user_name)";
+        
         $binds = [
             ':post_title' => $vo->getTitle(), 
             ':post_content' => $vo->getContent(), 
             ':post_date' => $vo->getDate(),
             ':user_id' => $vo->getUserId(),
             ':channel_id' => $vo->getChannelId(),
-            ':user_name' => $vo->getUserName(),
+            ':user_name' => $vo->getUserName()
         ];
 
         $db->execute($query, $binds);
@@ -49,6 +55,7 @@ final class PostModel {
                          post_content = :post_content, 
                          post_date = :post_date
                    WHERE id = :id";
+
         $binds = [
             ':post_title' => $vo->getTitle(), 
             ':post_content' => $vo->getContent(), 
@@ -57,12 +64,13 @@ final class PostModel {
         ];
         
         $db->execute($query, $binds);
-        
     }
 
     public function delete($vo) {
         $db = new Database();
         $query = "DELETE FROM posts WHERE id = :id";
+
         $db->execute($query, [':id' => $vo->getId()]);
     }
+
 }

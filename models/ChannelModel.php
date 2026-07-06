@@ -15,6 +15,7 @@ final class ChannelModel {
                     JOIN channel_user AS cu
                       ON c.id = cu.channel_id
                    WHERE cu.user_id = :id";
+
         $data = $db->select($query, [':id' => $vo->getId()]);
 
         $arrayDados = [];
@@ -35,6 +36,7 @@ final class ChannelModel {
         $query = "SELECT c.id, c.channel_name, c.channel_description, c.channel_owner
                     FROM channels AS c
                    WHERE c.id = :id";
+
         $data = $db->select($query, [':id' => $vo->getId()]);
 
         return new ChannelVO(
@@ -47,7 +49,10 @@ final class ChannelModel {
 
     public function insert($vo) {
         $db = new Database();
-        $query = "INSERT INTO channels(channel_name, channel_description, channel_owner) VALUES (:channel_name, :channel_description, :channel_owner)";
+        $query = "INSERT 
+                    INTO channels(channel_name, channel_description, channel_owner) 
+                  VALUES (:channel_name, :channel_description, :channel_owner)";
+        
         $binds = [
             ':channel_name' => $vo->getName(), 
             ':channel_description' => $vo->getDescription(), 
@@ -64,6 +69,7 @@ final class ChannelModel {
                          channel_description = :channel_description, 
                          channel_owner = :channel_owner
                    WHERE id = :id";
+
         $binds = [
             ':channel_name' => $vo->getName(), 
             ':channel_description' => $vo->getDescription(), 
@@ -72,12 +78,12 @@ final class ChannelModel {
         ];
         
         $db->execute($query, $binds);
-        
     }
 
     public function delete($vo) {
         $db = new Database();
         $query = "DELETE FROM channels WHERE id = :id";
+
         $db->execute($query, [':id' => $vo->getId()]);
     }
 
@@ -86,12 +92,10 @@ final class ChannelModel {
         $query = "SELECT u.user_name
                     FROM channel_user AS cu
                     JOIN users AS u
-                    ON u.id = cu.user_id
-                    WHERE cu.channel_id = :channel_id";
+                      ON u.id = cu.user_id
+                   WHERE cu.channel_id = :channel_id";
         
-        $data = $db->select($query, [
-            ':channel_id' => $vo->getId()
-        ]);
+        $data = $db->select($query, [':channel_id' => $vo->getId()]);
 
         $arrayDados = [];
         foreach ($data as $row) {
@@ -106,7 +110,11 @@ final class ChannelModel {
 
     public function isUserInChannel($vo) {
         $db = new Database();
-        $query = "SELECT * FROM channel_user WHERE channel_id = :channel_id AND user_id = :user_id";
+        $query = "SELECT * 
+                    FROM channel_user 
+                   WHERE channel_id = :channel_id 
+                     AND user_id = :user_id";
+
         $data = $db->select($query, [
             ':channel_id' => $vo->getChannelId(), 
             ':user_id' => $vo->getUserId()
@@ -125,7 +133,10 @@ final class ChannelModel {
 
     public function addUserToChannel($vo) {
         $db = new Database();
-        $query = "INSERT INTO channel_user(channel_id, user_id) VALUES (:channel_id, :user_id)";
+        $query = "INSERT 
+                    INTO channel_user(channel_id, user_id) 
+                  VALUES (:channel_id, :user_id)";
+
         $binds = [
             ':channel_id' => $vo->getChannelId(), 
             ':user_id' => $vo->getUserId()
@@ -136,7 +147,11 @@ final class ChannelModel {
 
     public function deleteUserFromChannel($vo) {
         $db = new Database();
-        $query = "DELETE FROM channel_user WHERE channel_id = :channel_id AND user_id = :user_id";
+        $query = "DELETE 
+                    FROM channel_user 
+                   WHERE channel_id = :channel_id 
+                     AND user_id = :user_id";
+
         $binds = [
             ':channel_id' => $vo->getChannelId(), 
             ':user_id' => $vo->getUserId()
@@ -147,8 +162,13 @@ final class ChannelModel {
     
     public function lastId() {
         $db = new Database();
-        $query = "SELECT id FROM channels ORDER BY id DESC LIMIT 1";
-        $data =$db->select($query);
+        $query = "SELECT id 
+                    FROM channels 
+                   ORDER BY id DESC LIMIT 1";
+
+        $data = $db->select($query);
+
         return $data[0][0];
     }
+    
 }

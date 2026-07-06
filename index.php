@@ -1,10 +1,12 @@
 <?php 
 
 require 'vendor/autoload.php';
+require_once('utils.php'); 
+    verifyLogin();
 
-require_once('utils.php'); verifyLogin();
+if (isLoggedIn()) { 
+    header('Location: home.php'); 
+}
 
-if (isLoggedIn()) { header('Location: home.php'); }
-
-header('Location: login.php');
+header('Location: '. LOGIN);
 exit;

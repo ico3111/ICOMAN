@@ -7,8 +7,11 @@
     <title>boards</title>
 </head>
 <body>
+<?php 
+    include_once('views/templates/pageHeader.php'); 
+    include_once('config.php');
+?>
 
-<?php include_once('views/templates/pageHeader.php'); ?>
 <td colspan="2">
     <br>
     <center>
@@ -18,7 +21,7 @@
                     <td>
                     <center>
                         <h3>[ New board ]</h3>
-                        <form action="board_add.php" method="post">
+                        <form action="<?=ENDPOINTS?>/board_add.php" method="post">
                             <table>   
                                 <tbody>
                                     <tr>
@@ -59,7 +62,7 @@
                                     <?php foreach($boards as $board): ?>
                                     <tr>
                                         <td>
-                                            <a href="tasks.php?id=<?php echo $board->getId(); ?>">ENTER</a>
+                                            <a href="<?=ENDPOINTS?>/tasks.php?id=<?php echo $board->getId(); ?>">ENTER</a>
                                         </td>
                                         <td>
                                             <input type="hidden" value="<?php echo $board->getId(); ?>">
@@ -73,11 +76,11 @@
                                         </td>
                                         <td>
                                             <?php if ($board->getOwnerName() == $user) { ?>
-                                            <a href="channel_del.php?id=<?php echo $board->getId(); ?>">
+                                            <a href="<?=ENDPOINTS?>/channel_del.php?id=<?php echo $board->getId(); ?>">
                                                 <button type="button">delete</button>
                                             </a>
                                             <?php } else { ?>
-                                            <a href="channel_delUser.php?user=<?php echo $user; ?>&channel=<?php echo $board->getId(); ?>">
+                                            <a href="<?=ENDPOINTS?>/channel_delUser.php?user=<?php echo $user; ?>&channel=<?php echo $board->getId(); ?>">
                                                 <button type="button">Quit</button>
                                             </a>
                                             <?php } ?>
@@ -95,24 +98,8 @@
     </center>
     <br>
 </td>
+
 <?php include_once('views/templates/pageFooter.php'); ?>
-
-<script>
-    document.getElementById("selectImage").addEventListener("change", function () {
-        document.body.style.backgroundImage = `url(${this.value})`;
-    });
-
-    document.getElementById("selectTheme").addEventListener("change", function () {
-        const theme = this.value;
-
-        if (theme === "light") {
-            document.body.style.backgroundColor = "white";
-            document.body.style.color = "black";
-        } else if (theme === "dark") {
-            document.body.style.backgroundColor = "black";
-            document.body.style.color = "white";
-        }
-    });
-</script>
+<script src="./scripts/instantBgChange.js"></script>
 </body>
 </html>

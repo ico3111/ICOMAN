@@ -1,10 +1,14 @@
 <?php
 
+// Importa dentro de utils para facilitar o acesso
+require_once('constants.php'); 
+
 function verifyLogin() {
     session_start();
 
     $currentPage = basename($_SERVER['PHP_SELF']);
     $allowedPages = ['index.php', 'login.php', 'register.php', 'doLogin.php', 'doRegister.php'];
+    
     if (!isset($_SESSION['user']) && !in_array($currentPage, $allowedPages)) {
         header('Location: index.php');
     }
@@ -16,10 +20,10 @@ function isLoggedIn() {
 }
 
 function verifyPrefsPosted() {
-
-    if (isset($_POST['themeImage']) && isset($_POST['themeMode'])) {
-        setcookie("preferences-theme", $_POST['themeMode'], time() + 10000000, '/');
-        setcookie("preferences-image", $_POST['themeImage'], time() + 10000000, '/');
+    if (!isset($_POST['themeImage']) or !isset($_POST['themeMode'])) {
+        return;
     } 
-
+    
+    setcookie("preferences-theme", $_POST['themeMode'], time() + 10000000, '/');
+    setcookie("preferences-image", $_POST['themeImage'], time() + 10000000, '/');
 }

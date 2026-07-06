@@ -13,108 +13,111 @@
     <title>Home</title>
 </head>
 <body>
+<?php 
+    include_once('views/templates/pageHeader.php');
+    include_once('config.php'); 
+?>
 
-    <?php include_once('views/templates/pageHeader.php'); ?>
-    <td> 
-        <center>
-            <h3>[Your Study Musics]</h3>
-            <table width="80%">
-                
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Audio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>C418 - Aria Math</td>
-                        <td>
-                            <audio src="media/musics/minecraft1.mp3" controls></audio>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>C418 - Moog City</td>
-                        <td>
-                            <audio src="media/musics/minecraft2.mp3" controls></audio>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </center>
-        <br>
-    </td>
-    <td>
-        <center>
-            <h3>[Timers]</h3>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                            <table width="100%">
-                                <tbody>
-                                    <tr>
-                                        <td>Stopwatch</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <center>
-                                                <p id="visor">00:00:00</p>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <center>
-                                                <button type="button" id="start">Start</button>&nbsp;
-                                                <button type="button" id="pause">Pause</button>&nbsp;
-                                                <button type="button" id="stop">Stop</button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        <table>
-                                <tbody>
-                                    <tr>
-                                        <td>Timer</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <center>
-                                                <p id="visor2">
-                                                    <input type="text" id="inptHour" placeholder="00">:
-                                                    <input type="text" id="inptMin" placeholder="00">:
-                                                    <input type="text" id="inptSeg" placeholder="00">
-                                                </p>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <center>
-                                                <button type="button" id="start2">Start</button>&nbsp;
-                                                <button type="button" id="pause2">Pause</button>&nbsp;
-                                                <button type="button" id="stop2">Stop</button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </center>
-        <br>
-    </td>
-    <?php include_once('views/templates/pageFooter.php'); ?>
+<td> 
+    <center>
+        <h3>[Your Study Musics]</h3>
+        <table width="80%">
+            
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Audio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>C418 - Aria Math</td>
+                    <td>
+                        <audio src="media/musics/minecraft1.mp3" controls></audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>C418 - Moog City</td>
+                    <td>
+                        <audio src="media/musics/minecraft2.mp3" controls></audio>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+    <br>
+</td>
+<td>
+    <center>
+        <h3>[Timers]</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <table width="100%">
+                            <tbody>
+                                <tr>
+                                    <td>Stopwatch</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <center>
+                                            <p id="visor">00:00:00</p>
+                                        </center>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <center>
+                                            <button type="button" id="start">Start</button>&nbsp;
+                                            <button type="button" id="pause">Pause</button>&nbsp;
+                                            <button type="button" id="stop">Stop</button>
+                                        </center>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <table>
+                            <tbody>
+                                <tr>
+                                    <td>Timer</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <center>
+                                            <p id="visor2">
+                                                <input type="text" id="inptHour" placeholder="00">:
+                                                <input type="text" id="inptMin" placeholder="00">:
+                                                <input type="text" id="inptSeg" placeholder="00">
+                                            </p>
+                                        </center>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <center>
+                                            <button type="button" id="start2">Start</button>&nbsp;
+                                            <button type="button" id="pause2">Pause</button>&nbsp;
+                                            <button type="button" id="stop2">Stop</button>
+                                        </center>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+    <br>
+</td>
 
-    <script src="views/scripts/cronometro.js"></script>
-    <script src="views/scripts/timer.js"></script>
+<?php include_once('views/templates/pageFooter.php'); ?>
+<script src="views/scripts/cronometro.js"></script>
+<script src="views/scripts/timer.js"></script>
 </body>
 </html>

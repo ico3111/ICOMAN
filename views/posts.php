@@ -7,8 +7,11 @@
     <title>Posts</title>
 </head>
 <body>
+<?php 
+    include_once('views/templates/pageHeader.php');
+    include_once('config.php'); 
+?>
 
-<?php include_once('views/templates/pageHeader.php'); ?>
 <td colspan="2">
     <br>
     <center>

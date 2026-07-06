@@ -7,8 +7,11 @@
     <title>Channels</title>
 </head>
 <body>
+<?php
+    include_once('views/templates/pageHeader.php'); 
+    include_once('config.php');
+?>
 
-<?php include_once('views/templates/pageHeader.php'); ?>
 <td colspan="2">
     <br>
     <center>
@@ -95,24 +98,8 @@
     </center>
     <br>
 </td>
+
 <?php include_once('views/templates/pageFooter.php'); ?>
-
-<script>
-    document.getElementById("selectImage").addEventListener("change", function () {
-        document.body.style.backgroundImage = `url(${this.value})`;
-    });
-
-    document.getElementById("selectTheme").addEventListener("change", function () {
-        const theme = this.value;
-
-        if (theme === "light") {
-            document.body.style.backgroundColor = "white";
-            document.body.style.color = "black";
-        } else if (theme === "dark") {
-            document.body.style.backgroundColor = "black";
-            document.body.style.color = "white";
-        }
-    });
-</script>
+<script src="./scripts/instantBgChange.js"></script>
 </body>
 </html>
