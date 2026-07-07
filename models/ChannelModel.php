@@ -6,15 +6,15 @@ use Model\VO\Channel_userVO;
 use Model\VO\ChannelVO;
 use Model\VO\UserVO;
 
-final class ChannelModel {
+final class ChannelModel extends Model {
 
     public function selectAll($vo) {
         $db = new Database();
-        $query = "SELECT c.id, c.channel_name, c.channel_description, c.channel_owner
-                    FROM channels AS c
-                    JOIN channel_user AS cu
-                      ON c.id = cu.channel_id
-                   WHERE cu.user_id = :id";
+        $query = "SELECT channels.id, channels.channel_name, channels.channel_description, channels.channel_owner
+                    FROM channels
+                    JOIN channel_user
+                      ON channels.id = channel_user.channel_id
+                   WHERE channel_user.user_id = :id";
 
         $data = $db->select($query, [':id' => $vo->getId()]);
 
@@ -33,9 +33,9 @@ final class ChannelModel {
 
     public function selectOne($vo) {
         $db = new Database();
-        $query = "SELECT c.id, c.channel_name, c.channel_description, c.channel_owner
-                    FROM channels AS c
-                   WHERE c.id = :id";
+        $query = "SELECT channels.id, channels.channel_name, channels.channel_description, channels.channel_owner
+                    FROM channels
+                   WHERE channels.id = :id";
 
         $data = $db->select($query, [':id' => $vo->getId()]);
 
@@ -87,13 +87,15 @@ final class ChannelModel {
         $db->execute($query, [':id' => $vo->getId()]);
     }
 
+    // Matutenção de usuários nos Channels
+
     public function selectUsersInChannel($vo) {
         $db = new Database();
-        $query = "SELECT u.user_name
-                    FROM channel_user AS cu
-                    JOIN users AS u
-                      ON u.id = cu.user_id
-                   WHERE cu.channel_id = :channel_id";
+        $query = "SELECT users.user_name
+                    FROM channel_user
+                    JOIN users
+                      ON users.id = channel_user.user_id
+                   WHERE channel_user.channel_id = :channel_id";
         
         $data = $db->select($query, [':channel_id' => $vo->getId()]);
 

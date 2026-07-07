@@ -6,7 +6,7 @@ use Model\VO\board_userVO;
 use Model\VO\BoardVO;
 use Model\VO\UserVO;
 
-final class BoardModel {
+final class BoardModel extends Model{
 
     public function selectAll($vo) {
         $db = new Database();     
@@ -88,6 +88,8 @@ final class BoardModel {
 
         $db->execute($query, [':id' => $vo->getId()]);
     }
+
+    // Matutenção de usuários nos Boards
 
     public function selectUsersInBoard($vo) {
         $db = new Database();

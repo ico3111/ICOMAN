@@ -4,7 +4,7 @@ namespace Model;
 
 use Model\VO\PostVO;
 
-final class PostModel {
+final class PostModel extends Model {
 
     public function selectAll($vo) {
         $db = new Database();
@@ -28,6 +28,10 @@ final class PostModel {
         }
 
         return $arrayDados;
+    }
+
+    public function selectOne() {
+        // ...
     }
 
     public function insert($vo) {
