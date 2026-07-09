@@ -13,7 +13,7 @@ abstract class Controller {
     
     public function loadView($url, $data = []) {
         extract($data);
-        include('views/'. $url .'.php');
+        include('./../views/'. $url .'.php');
     }
 
     public function getUserId() {
