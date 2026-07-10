@@ -8,9 +8,11 @@ tr,
 td {
   border-collapse: collapse;
 }
+
 p {
   font-size: 14px;
 }
+
 .btn {
   border-style: solid;
   border-width: 1px 1px 2px 2px;
@@ -19,49 +21,24 @@ p {
   background-color: #538adc;
   color: #ffffff;
 }
+
 input {
   border-width: 1;
   border-color: #666666;
   background-color: #d9dfea;
 }
 
-table {
-  border-collapse: collapse;
-}
 td,
 th {
   border: 1px solid #dab630;
   text-align: center;
   vertical-align: middle;
 }
+
 audio {
   width: 90%;
 }
 
-/*
-
-        table {border-collapse: collapse;}
-        td,th {border: 1px solid #3b5998; text-align: center; vertical-align: middle;}
-        input {width: 15px;}
-        audio {width: 90%;}
-
-
-        
-<script>
-    document.getElementById("selectImage").addEventListener("change", function () {
-        document.body.style.backgroundImage = `url(${this.value})`;
-    });
-
-    document.getElementById("selectTheme").addEventListener("change", function () {
-        const theme = this.value;
-
-        if (theme === "light") {
-            document.body.style.backgroundColor = "white";
-            document.body.style.color = "black";
-        } else if (theme === "dark") {
-            document.body.style.backgroundColor = "black";
-            document.body.style.color = "white";
-        }
-    });
-</script>
-*/
+.timerInput {
+  width: 15px;
+}

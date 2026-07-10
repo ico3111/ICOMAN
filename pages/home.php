@@ -13,13 +13,13 @@
                 <tr>
                     <td>C418 - Aria Math</td>
                     <td>
-                        <audio src="media/musics/minecraft1.mp3" controls></audio>
+                        <audio src="<?=MEDIA_URL?>/musics/minecraft1.mp3" controls></audio>
                     </td>
                 </tr>
                 <tr>
                     <td>C418 - Moog City</td>
                     <td>
-                        <audio src="media/musics/minecraft2.mp3" controls></audio>
+                        <audio src="<?=MEDIA_URL?>/musics/minecraft2.mp3" controls></audio>
                     </td>
                 </tr>
             </tbody>
@@ -70,9 +70,9 @@
                                     <td>
                                         <center>
                                             <p id="visor2">
-                                                <input type="text" id="inptHour" placeholder="00">:
-                                                <input type="text" id="inptMin" placeholder="00">:
-                                                <input type="text" id="inptSeg" placeholder="00">
+                                                <input type="text" id="inptHour" class="timerInput" placeholder="00">:
+                                                <input type="text" id="inptMin" class="timerInput" placeholder="00">:
+                                                <input type="text" id="inptSeg" class="timerInput" placeholder="00">
                                             </p>
                                         </center>
                                     </td>

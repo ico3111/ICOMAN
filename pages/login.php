@@ -16,40 +16,5 @@
     </center>
 </td>
 <td width="60%" style="padding: 3px;">
-    <table>
-        <tbody style="border: 1px solid #3b5998">
-            <tr>
-                <td style="background-color: #3b5998; color: white">
-                    Welcome to <?php echo APP_NAME; ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td style=" padding-left: 15px;">
-                                    <br>
-                                    <center>
-                                        <h1 style="font-size: large;">[ <?php echo APP_NAME; ?> ]</h1>
-                                    </center>
-                                    <p>O <?php echo APP_NAME; ?> é um projeto pessoal com finalidade de uso próprio. O programa serve um centro organizacional e aconchegante com as ferramentas necessárias para proporcionar um ambiente agradável para estudar.</p>
-                                    <p>Se você é um hacker ou um bot, plis, não exploda o meu site, ainda estou aprendendo.</p>
-                                    <p>O que você pode encontrar por aqui: 
-                                        <br>
-                                        <b>•</b> Timers e cronômetros para controlar o tempo de estudo<br>
-                                        <b>•</b> Músicas para estudar<br>
-                                        <b>•</b> Blog diário<br>
-                                        <b>•</b> Quadro de tarefas<br>
-                                        <b>•</b> Gerenciador de hábitos<br>
-                                    </p>
-                                    <p>Para começar, faça login.</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>       
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <?php echo AssembleInitialMessage(true); ?>
 </td>
