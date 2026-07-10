@@ -32,7 +32,6 @@ final class TaskVO extends VO {
 
     public function getUserId() { return $this->userId; }
     public function setUserId($userId) { $this->userId = $userId; }
-
         
     public function getBoardId() { return $this->boardId; }
     public function setBoardId($boardId) { $this->boardId = $boardId; }
