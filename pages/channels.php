@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="views/styles/style1.css">
-    <title>boards</title>
-</head>
-<body>
-<?php 
-    include_once('views/templates/pageHeader.php'); 
-    include_once('config.php');
-?>
-
 <td colspan="2">
     <br>
     <center>
@@ -20,8 +6,8 @@
                 <tr>
                     <td>
                     <center>
-                        <h3>[ New board ]</h3>
-                        <form action="<?=ENDPOINTS?>/board_add.php" method="post">
+                        <h3>[ New Channel ]</h3>
+                        <form action="channel_add.php" method="post">
                             <table>   
                                 <tbody>
                                     <tr>
@@ -48,7 +34,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <h3>[ boards You are In ]</h3> 
+                        <h3>[ Channels You are In ]</h3> 
                         <center>
                             <table>
                                 <thead>
@@ -59,28 +45,28 @@
                                     <th>Action</th>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($boards as $board): ?>
+                                    <?php foreach($channels as $channel): ?>
                                     <tr>
                                         <td>
-                                            <a href="<?=ENDPOINTS?>/tasks.php?id=<?php echo $board->getId(); ?>">ENTER</a>
+                                            <a href="posts.php?id=<?php echo $channel->getId(); ?>">ENTER</a>
                                         </td>
                                         <td>
-                                            <input type="hidden" value="<?php echo $board->getId(); ?>">
-                                            <?php echo $board->getName(); ?>
+                                            <input type="hidden" value="<?php echo $channel->getId(); ?>">
+                                            <?php echo $channel->getName(); ?>
                                         </td>
                                         <td>
-                                            <textarea cols="20" rows="2"><?php echo $board->getDescription(); ?></textarea>
+                                            <textarea cols="20" rows="2"><?php echo $channel->getDescription(); ?></textarea>
                                         </td>
                                         <td>
-                                            <?php echo $board->getOwnerName(); ?>
+                                            <?php echo $channel->getOwnerName(); ?>
                                         </td>
                                         <td>
-                                            <?php if ($board->getOwnerName() == $user) { ?>
-                                            <a href="<?=ENDPOINTS?>/channel_del.php?id=<?php echo $board->getId(); ?>">
+                                            <?php if ($channel->getOwnerName() == $user) { ?>
+                                            <a href="channel_del.php?id=<?php echo $channel->getId(); ?>">
                                                 <button type="button">delete</button>
                                             </a>
                                             <?php } else { ?>
-                                            <a href="<?=ENDPOINTS?>/channel_delUser.php?user=<?php echo $user; ?>&channel=<?php echo $board->getId(); ?>">
+                                            <a href="channel_delUser.php?user=<?php echo $user; ?>&channel=<?php echo $channel->getId(); ?>">
                                                 <button type="button">Quit</button>
                                             </a>
                                             <?php } ?>
@@ -98,8 +84,3 @@
     </center>
     <br>
 </td>
-
-<?php include_once('views/templates/pageFooter.php'); ?>
-<script src="./scripts/instantBgChange.js"></script>
-</body>
-</html>

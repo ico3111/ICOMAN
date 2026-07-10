@@ -93,7 +93,7 @@ final class BoardModel extends Model{
 
     public function selectUsersInBoard($vo) {
         $db = new Database();
-        $query = "SELECT board_user.user_name
+        $query = "SELECT users.user_name
                     FROM board_user
                     JOIN users
                       ON users.id = board_user.user_id

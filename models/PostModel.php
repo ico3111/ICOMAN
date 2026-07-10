@@ -30,7 +30,7 @@ final class PostModel extends Model {
         return $arrayDados;
     }
 
-    public function selectOne() {
+    public function selectOne($vo) {
         // ...
     }
 

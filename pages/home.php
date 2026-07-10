@@ -1,23 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="views/styles/style1.css">
-    <style>
-        table {border-collapse: collapse;}
-        td,th {border: 1px solid #3b5998; text-align: center; vertical-align: middle;}
-        input {width: 15px;}
-        audio {width: 90%;}
-    </style>
-    <title>Home</title>
-</head>
-<body>
-<?php 
-    include_once('views/templates/pageHeader.php');
-    include_once('config.php'); 
-?>
-
 <td> 
     <center>
         <h3>[Your Study Musics]</h3>
@@ -115,9 +95,3 @@
     </center>
     <br>
 </td>
-
-<?php include_once('views/templates/pageFooter.php'); ?>
-<script src="views/scripts/cronometro.js"></script>
-<script src="views/scripts/timer.js"></script>
-</body>
-</html>

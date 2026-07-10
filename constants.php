@@ -1,6 +1,12 @@
 <?php
 
 #+
+#+ DEFINE INFORMACOES DA APLICACAO
+#+
+define("APP_NAME", "ICOMAN");
+define("APP_VERSION", "1.3");
+
+#+
 #+ RAIZ E DIRETORIOS DO PROJETO (Para a máquina/servidor)
 #+
 define("PROJECT_ROOT", __DIR__);
@@ -11,7 +17,10 @@ define("PROJECT_ROOT", __DIR__);
 $project_uri = str_replace($_SERVER['DOCUMENT_ROOT'], '', str_replace('\\', '/', __DIR__));
 
 define("URL_ROOT", $project_uri);
-define("ENDPOINTS_URL", URL_ROOT . "/a/");
+define("ENDPOINTS_URL", URL_ROOT . "/view/");
+define("STYLES_URL",    URL_ROOT . "/pages/styles");
+define("SCRIPTS_URL",   URL_ROOT . "/pages/scripts");
+define("MEDIA_URL",     URL_ROOT . "/media");
 
 #+
 #+ ENDPOINTS DO SISTEMA

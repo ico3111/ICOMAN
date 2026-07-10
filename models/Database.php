@@ -2,8 +2,6 @@
 
 namespace Model;
 
-require_once('config.php');
-
 use PDO;
 
 class Database {

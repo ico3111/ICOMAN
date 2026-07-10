@@ -12,8 +12,10 @@ abstract class Controller {
     }
     
     public function loadView($url, $data = []) {
+        echo assemblePageTop($url, "style");
         extract($data);
-        include('./../views/'. $url .'.php');
+        include('./../pages/'. $url .'.php');
+        echo assemblePageFooter();
     }
 
     public function getUserId() {
