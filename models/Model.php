@@ -2,12 +2,14 @@
 
 namespace Model;
 
+use Model\Entity\Entity;
+
 abstract class Model {
 
-    abstract public function selectAll($vo);
-    abstract public function selectOne($vo);
-    abstract public function insert($vo);
-    abstract public function update($vo);
-    abstract public function delete($vo);
+    abstract public function selectAll(int $id): array;
+    abstract public function selectOne(int $id): Entity;
+    abstract public function insert(Entity $entity): void;
+    abstract public function update(Entity$entity): void;
+    abstract public function delete(int $id): void;
     
 }

@@ -2,13 +2,11 @@
 
 namespace Model;
 
-use Model\VO\board_userVO;
-use Model\VO\BoardVO;
-use Model\VO\UserVO;
+use Model\Entity\Board;
 
 final class BoardModel extends Model{
 
-    public function selectAll($vo) {
+    public function selectAll(int $userId): array {
         $db = new Database();     
         $query = "SELECT boards.id, boards.board_name, boards.board_description, boards.board_owner
                     FROM boards
@@ -16,11 +14,11 @@ final class BoardModel extends Model{
                       ON boards.id = board_user.board_id
                    WHERE board_user.user_id = :id";
 
-        $data = $db->select($query, [':id' => $vo->getId()]);
+        $data = $db->select($query, [':id' => $userId]);
 
         $arrayDados = [];
         foreach ($data as $row) {
-            array_push($arrayDados, new BoardVO(
+            array_push($arrayDados, new Board(
                 $row['id'], 
                 $row['board_name'], 
                 $row['board_description'], 

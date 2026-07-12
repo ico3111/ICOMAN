@@ -1,0 +1,37 @@
+<?php
+
+namespace Model\Entity;
+
+final class Post extends Entity {
+    
+    private string $title;
+    private string $content;
+    private string $date;
+    private User $user;
+    private Channel $channel;
+    
+    public function __construct(int $id, string $title, string $content, string $date, User $user, Channel $channel) 
+    {
+        parent::__construct($id);
+        $this->title = $title;
+        $this->content = $content;
+        $this->date = $date;
+        $this->user = $user;
+        $this->channel = $channel;
+    }
+
+    public function getTitle(): string { return $this->title; }
+    public function setTitle(string $title): void { $this->title = $title; }
+
+    public function getContent(): string { return $this->content; }
+    public function setContent(string $content): void { $this->content = $content; }
+
+    public function getDate(): string { return $this->date; }
+    public function setDate(string $date): void { $this->date = $date; }
+
+    public function getUser(): User { return $this->user; }
+    public function setUser(User $user): void { $this->user = $user; }
+
+    public function getChannel(): Channel { return $this->channel; }
+    public function setChannel(Channel $channel): void { $this->channel = $channel; }
+}
