@@ -6,45 +6,36 @@ use Model\Entity\Board;
 
 final class BoardModel extends Model{
 
-    public function selectAll(int $userId): array {
+    public function selectAll(int $userId): array
+    {
         $db = new Database();     
-        $query = "SELECT boards.id, boards.board_name, boards.board_description, boards.board_owner
+        $query = "SELECT boards.id, boards.board_name, boards.board_description, 
+                         users.id as owner_id, users.name as owner_name
                     FROM boards
                     JOIN board_user
                       ON boards.id = board_user.board_id
+                    JOIN users
+                      ON boards.board_owner = users.id
                    WHERE board_user.user_id = :id";
 
         $data = $db->select($query, [':id' => $userId]);
 
-        $arrayDados = [];
-        foreach ($data as $row) {
-            array_push($arrayDados, new Board(
-                $row['id'], 
-                $row['board_name'], 
-                $row['board_description'], 
-                $row['board_owner']
-            ));
-        }
-
-        return $arrayDados;
+        return Board::fromCollection($data);
     }
 
-    public function selectOne($vo) {
+    public function selectOne(int $boardId): Board
+    {
         $db = new Database();
-        $query = "SELECT boards.id, boards.board_name, boards.board_description, boards.board_owner
+        $query = "SELECT boards.id, boards.board_name, boards.board_description, 
+                         users.id as owner_id, users.name as owner_name
                     FROM boards
+                    JOIN users
+                      ON boards.board_owner = users.id
                    WHERE boards.id = :id";
 
-        $data = $db->select($query, [':id' => $vo->getId()]);
+        $data = $db->select($query, [':id' => $boardId]);
 
-        $board = new BoardVO(
-            $data[0]['id'], 
-            $data[0]['board_name'], 
-            $data[0]['board_description'], 
-            $data[0]['board_owner']
-        );
-
-        return $board;
+        return Board::fromArray($data[0]);
     }
 
     public function insert($vo) {

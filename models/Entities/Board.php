@@ -16,6 +16,25 @@ final class Board extends Entity {
         $this->owner = $owner;
     }
 
+    public static function fromArray(array $data) : Board
+    {
+        return new Board(
+                $row['id'], 
+                $row['board_name'], 
+                $row['board_description'], 
+                $row['board_owner']);
+    }
+
+    public static function fromCollection(array $data): array
+    {
+        $arrayData = [];
+        foreach($data as $row) {
+            array_push($arrayData, fromArray($row))
+        }
+
+        return $arrayData;
+    }
+
     public function getName(): string { return $this->name; }
     public function setName(string $name): void { $this->name = $name; }
 
