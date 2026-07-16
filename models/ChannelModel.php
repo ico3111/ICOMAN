@@ -2,49 +2,39 @@
 
 namespace Model;
 
+use Model\Entity\Channel;
 use Model\VO\Channel_userVO;
 use Model\VO\ChannelVO;
 use Model\VO\UserVO;
 
 final class ChannelModel extends Model {
 
-    public function selectAll($vo) {
+    public function selectAll(int $userId): array 
+    {
         $db = new Database();
-        $query = "SELECT channels.id, channels.channel_name, channels.channel_description, channels.channel_owner
+        $query = "SELECT channels.*
                     FROM channels
                     JOIN channel_user
                       ON channels.id = channel_user.channel_id
                    WHERE channel_user.user_id = :id";
 
-        $data = $db->select($query, [':id' => $vo->getId()]);
+        $data = $db->select($query, [':id' => $userId]);
 
-        $arrayDados = [];
-        foreach ($data as $row) {
-            array_push($arrayDados, new ChannelVO(
-                $row['id'], 
-                $row['channel_name'], 
-                $row['channel_description'], 
-                $row['channel_owner']
-            ));
-        }
-
-        return $arrayDados;
+        return Channel::fromCollection($data);
     }
 
-    public function selectOne($vo) {
+    public function selectOne(int $channelId): ?Channel 
+    {
         $db = new Database();
         $query = "SELECT channels.id, channels.channel_name, channels.channel_description, channels.channel_owner
                     FROM channels
                    WHERE channels.id = :id";
 
-        $data = $db->select($query, [':id' => $vo->getId()]);
+        $data = $db->select($query, [':id' => $channelId]);
 
-        return new ChannelVO(
-            $data[0]['id'], 
-            $data[0]['channel_name'], 
-            $data[0]['channel_description'], 
-            $data[0]['channel_owner']
-        );
+        if (empty($data)) { return null;}
+
+        return Channel::fromArray($data[0]);
     }
 
     public function insert($vo) {

@@ -2,6 +2,8 @@
 
 namespace Model\Entity;
 
+use Model\UserModel;
+
 final class Channel extends Entity {
     
     private string $name;
@@ -14,6 +16,28 @@ final class Channel extends Entity {
         $this->name = $name;
         $this->description = $description;
         $this->owner = $owner;
+    }
+
+    public static function fromArray(array $data) : Channel
+    {
+        $userModel = new UserModel();
+        
+        return new Channel(
+            $data['id'], 
+            $data['channel_name'], 
+            $data['channel_description'], 
+            $userModel->selectOne($data['channel_owner'])
+        );
+    }
+
+    public static function fromCollection(array $data): array
+    {
+        $arrayData = [];
+        foreach($data as $row) {
+            $arrayData[] = self::fromArray($row);
+        }
+
+        return $arrayData;
     }
 
     public function getName(): string { return $this->name; }

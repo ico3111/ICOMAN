@@ -2,6 +2,8 @@
 
 namespace Model\Entity;
 
+use Model\UserModel;
+
 final class Board extends Entity {
     
     private string $name;
@@ -18,18 +20,21 @@ final class Board extends Entity {
 
     public static function fromArray(array $data) : Board
     {
+        $userModel = new UserModel();
+        
         return new Board(
-                $row['id'], 
-                $row['board_name'], 
-                $row['board_description'], 
-                $row['board_owner']);
+            $data['id'], 
+            $data['board_name'], 
+            $data['board_description'], 
+            $userModel->selectOne($data['board_owner'])
+        );
     }
 
     public static function fromCollection(array $data): array
     {
         $arrayData = [];
         foreach($data as $row) {
-            array_push($arrayData, fromArray($row))
+            $arrayData[] = self::fromArray($row);
         }
 
         return $arrayData;

@@ -32,7 +32,7 @@ class UserController extends Controller {
         if (empty($login) || empty($password)) { $this->redirect('login.php?message=Preencha todos os campos.'); }
 
         $model = new UserModel();
-        $user = $model->selectOne(new UserVO('', $login));
+        $user = $model->selectLogin($login);
 
         if (empty($user)) { $this->redirect('login.php?message=Nenhum usuario foi encontrado.'); }
 

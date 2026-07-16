@@ -2,6 +2,9 @@
 
 namespace Model\Entity;
 
+use Model\ChannelModel;
+use Model\UserModel;
+
 final class Post extends Entity {
     
     private string $title;
@@ -18,6 +21,31 @@ final class Post extends Entity {
         $this->date = $date;
         $this->user = $user;
         $this->channel = $channel;
+    }
+
+    public static function fromArray(array $data) : Post
+    {
+        $userModel = new UserModel();
+        $channelModel = new ChannelModel();
+        
+        return new Post(
+            $data['id'], 
+            $data['post_title'], 
+            $data['post_content'], 
+            $data['post_date'], 
+            $userModel->selectOne($data['user_id']),
+            $channelModel->selectOne($data['channel_id'])
+        );
+    }
+
+    public static function fromCollection(array $data): array
+    {
+        $arrayData = [];
+        foreach($data as $row) {
+            $arrayData[] = self::fromArray($row);
+        }
+
+        return $arrayData;
     }
 
     public function getTitle(): string { return $this->title; }

@@ -7,11 +7,30 @@ final class User extends Entity {
     private string $username;
     private string $password;
     
-    public function __construct(int $id, string $username, string $password)
+    public function __construct(int $id, string $username, string $password = '')
     {
         parent::__construct($id);
         $this->username = $username;
         $this->password = $password;
+    }
+
+    public static function fromArray(array $data) : User
+    {
+        return new User(
+            $data['id'], 
+            $data['user_name'], 
+            $data['user_password']
+        );
+    }
+
+    public static function fromCollection(array $data): array
+    {
+        $arrayData = [];
+        foreach($data as $row) {
+            $arrayData[] = self::fromArray($row);
+        }
+
+        return $arrayData;
     }
 
     public function getUsername(): string { return $this->username; }

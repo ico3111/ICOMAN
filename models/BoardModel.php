@@ -9,13 +9,10 @@ final class BoardModel extends Model{
     public function selectAll(int $userId): array
     {
         $db = new Database();     
-        $query = "SELECT boards.id, boards.board_name, boards.board_description, 
-                         users.id as owner_id, users.name as owner_name
+        $query = "SELECT boards.*
                     FROM boards
                     JOIN board_user
                       ON boards.id = board_user.board_id
-                    JOIN users
-                      ON boards.board_owner = users.id
                    WHERE board_user.user_id = :id";
 
         $data = $db->select($query, [':id' => $userId]);
@@ -26,8 +23,7 @@ final class BoardModel extends Model{
     public function selectOne(int $boardId): Board
     {
         $db = new Database();
-        $query = "SELECT boards.id, boards.board_name, boards.board_description, 
-                         users.id as owner_id, users.name as owner_name
+        $query = "SELECT boards.*
                     FROM boards
                     JOIN users
                       ON boards.board_owner = users.id
@@ -38,7 +34,7 @@ final class BoardModel extends Model{
         return Board::fromArray($data[0]);
     }
 
-    public function insert($vo) {
+    public function insert() {
         $db = new Database();
         $query = "INSERT 
                     INTO boards(board_name, board_description, board_owner) 
