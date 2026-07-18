@@ -2,79 +2,75 @@
 
 namespace Model;
 
-use Model\VO\PostVO;
+use Model\Entity\Post;
 
-final class PostModel extends Model {
-
-    public function selectAll($vo) {
-        $db = new Database();
-        $query = "SELECT id, post_title, post_content, post_date, user_id, channel_id, user_name
+final class PostModel extends Model
+{
+    public function selectAll(int $channelId): array
+    {
+        $query = "SELECT posts.*
                     FROM posts
                    WHERE channel_id = :id";
 
-        $data = $db->select($query, [':id' => $vo->getChannelId()]);
+        $data = $this->db->select($query, [':id' => $channelId]);
 
-        $arrayDados = [];
-        foreach ($data as $row) {
-            array_push($arrayDados, new PostVO(
-                $row['id'], 
-                $row['post_title'], 
-                $row['post_content'], 
-                $row['post_date'], 
-                $row['user_id'], 
-                $row['channel_id'], 
-                $row['user_name']
-            ));
-        }
-
-        return $arrayDados;
+        return Post::fromCollection($data);
     }
 
-    public function selectOne($vo) {
-        // ...
+    public function selectOne(int $postId): ?Post
+    {
+        $query = "SELECT posts.*
+                    FROM posts
+                   WHERE posts.id = :id";
+
+        $data = $this->db->select($query, [':id' => $postId]);
+
+        if (empty($data)) { return null; }
+
+        return Post::fromArray($data[0]);
     }
 
-    public function insert($vo) {
-        $db = new Database();
-        $query = "INSERT 
-                    INTO posts(post_title, post_content, post_date, user_id, channel_id, user_name) 
-                  VALUES (:post_title, :post_content, :post_date, :user_id, :channel_id, :user_name)";
-        
+    public function insert($post): void
+    {
+        $query = "INSERT
+                    INTO posts(post_title, post_content, post_date, user_id, channel_id)
+                  VALUES (:post_title, :post_content, :post_date, :user_id, :channel_id)";
+
         $binds = [
-            ':post_title' => $vo->getTitle(), 
-            ':post_content' => $vo->getContent(), 
-            ':post_date' => $vo->getDate(),
-            ':user_id' => $vo->getUserId(),
-            ':channel_id' => $vo->getChannelId(),
-            ':user_name' => $vo->getUserName()
+            ':post_title' => $post->getTitle(),
+            ':post_content' => $post->getContent(),
+            ':post_date' => $post->getDate(),
+            ':user_id' => $post->getUser()->getId(),
+            ':channel_id' => $post->getChannel()->getId()
         ];
 
-        $db->execute($query, $binds);
+        $this->db->execute($query, $binds);
     }
-    
-    public function update($vo) {
-        $db = new Database();
-        $query = "UPDATE posts 
-                     SET post_title = :post_title, 
-                         post_content = :post_content, 
+
+    public function update($post): void
+    {
+        $query = "UPDATE posts
+                     SET post_title = :post_title,
+                         post_content = :post_content,
                          post_date = :post_date
                    WHERE id = :id";
 
         $binds = [
-            ':post_title' => $vo->getTitle(), 
-            ':post_content' => $vo->getContent(), 
-            ':post_date' => $vo->getDate(), 
-            ':id' => $vo->getId()
+            ':post_title' => $post->getTitle(),
+            ':post_content' => $post->getContent(),
+            ':post_date' => $post->getDate(),
+            ':id' => $post->getId()
         ];
-        
-        $db->execute($query, $binds);
+
+        $this->db->execute($query, $binds);
     }
 
-    public function delete($vo) {
-        $db = new Database();
-        $query = "DELETE FROM posts WHERE id = :id";
+    public function delete(int $postId): void
+    {
+        $query = "DELETE
+                    FROM posts
+                   WHERE id = :id";
 
-        $db->execute($query, [':id' => $vo->getId()]);
+        $this->db->execute($query, [':id' => $postId]);
     }
-
 }

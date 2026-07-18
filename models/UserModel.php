@@ -4,69 +4,81 @@ namespace Model;
 
 use Model\Entity\User;
 
-final class UserModel extends Model {
-
+final class UserModel extends Model
+{
     public function selectAll(int $userId): array
     {
-        $db = new Database();
-        $query = "SELECT *
+        $query = "SELECT users.*
                     FROM users
                    WHERE id = :id";
 
-        $data = $db->select($query, [':id' => $userId]);
+        $data = $this->db->select($query, [':id' => $userId]);
 
         return User::fromCollection($data);
     }
 
-    public function selectOne(int $userId): User 
+    public function selectOne(int $userId): ?User
     {
-        $db = new Database();
-        $query = "SELECT *
+        $query = "SELECT users.*
                     FROM users
-                   WHERE user_name = :user_name";
+                   WHERE users.id = :id";
 
-        $data = $db->select($query, [':user_name' => $userId]);
+        $data = $this->db->select($query, [':id' => $userId]);
+
+        if (empty($data)) { return null; }
 
         return User::fromArray($data[0]);
     }
 
     public function selectLogin(string $userName): ?User
     {
-        $db = new Database();
-        $query = "SELECT *
+        $query = "SELECT users.*
                     FROM users
-                   WHERE user_name = :user_name";
+                   WHERE users.user_name = :user_name";
 
-        $data = $db->select($query, [':user_name' => $userName]);
+        $data = $this->db->select($query, [':user_name' => $userName]);
 
         if (empty($data)) { return null; }
 
         return User::fromArray($data[0]);
     }
-    
+
     public function insert($user): void
     {
-        $db = new Database();
-        $query = "INSERT 
-                    INTO users(user_name, user_password) 
+        $query = "INSERT
+                    INTO users(user_name, user_password)
                   VALUES (:user_name, :user_password)";
-        
+
         $binds = [
-            ':user_name' => $user->getUsername(), 
+            ':user_name' => $user->getUsername(),
             ':user_password' => $user->getPassword()
         ];
 
-        $db->execute($query, $binds);
+        $this->db->execute($query, $binds);
     }
-    
+
     public function update($user): void
     {
-        // ...
+        $query = "UPDATE users
+                     SET user_name = :user_name,
+                         user_password = :user_password
+                   WHERE id = :id";
+
+        $binds = [
+            ':user_name' => $user->getUsername(),
+            ':user_password' => $user->getPassword(),
+            ':id' => $user->getId()
+        ];
+
+        $this->db->execute($query, $binds);
     }
-    
+
     public function delete(int $userId): void
     {
-        // ...
+        $query = "DELETE
+                    FROM users
+                   WHERE id = :id";
+
+        $this->db->execute($query, [':id' => $userId]);
     }
-    
 }

@@ -2,6 +2,10 @@
 
 namespace Model\Entity;
 
+use Model\BoardModel;
+use Model\TaskModel;
+use Model\UserModel;
+
 final class Task extends Entity {
     
     private string $title;
@@ -20,6 +24,32 @@ final class Task extends Entity {
         $this->isChecked = $isChecked;
         $this->user = $user;
         $this->board = $board;
+    }
+
+    public static function fromArray(array $data): Task
+    {
+        $userModel = new UserModel();
+        $boardModel = new BoardModel();
+        
+        return new Task(
+            $data['id'], 
+            $data['task_title'], 
+            $data['task_description'], 
+            $data['task_deadline'], 
+            $data['is_checked'], 
+            $userModel->selectOne($data['user_id']),
+            $boardModel->selectOne($data['board_id'])
+        );
+    }
+
+    public static function fromCollection(array $data): array
+    {
+        $arrayData = [];
+        foreach($data as $row) {
+            $arrayData[] = self::fromArray($row);
+        }
+
+        return $arrayData;
     }
 
     public function getTitle(): string { return $this->title; }
