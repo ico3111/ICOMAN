@@ -10,7 +10,7 @@ final class Channel extends Entity {
     private string $description;
     private User $owner;
     
-    public function __construct(int $id, string $name, string $description, User $owner) 
+    public function __construct(?int $id, string $name, string $description, User $owner) 
     {
         parent::__construct($id);
         $this->name = $name;

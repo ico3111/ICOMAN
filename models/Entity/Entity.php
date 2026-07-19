@@ -4,9 +4,9 @@ namespace Model\Entity;
 
 abstract class Entity {
 
-    protected int $id;
+    protected ?int $id;
 
-    public function __construct(int $id) 
+    public function __construct(?int $id) 
     {
         $this-> id = $id;
     }

@@ -5,6 +5,7 @@
 #+
 define("APP_NAME", "ICOMAN");
 define("APP_VERSION", "1.3");
+define("ADMIN_ID", 1);
 
 #+
 #+ RAIZ E DIRETORIOS DO PROJETO (Para a máquina/servidor)

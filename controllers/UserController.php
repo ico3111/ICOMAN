@@ -2,69 +2,82 @@
 
 namespace Controller;
 
+use Exception;
+use Model\Entity\User;
 use Model\UserModel;
-use Model\VO\UserVO;
 
 class UserController extends Controller {
    
-    public function showHome() {
-        $message = $_GET['message'] ?? null;
-        $error = $_GET['error'] ?? null;
-        $this->loadView('home', ['message' => $message, 'error' => $error]);
+    public function showHome(): void
+    {
+        $this->loadView('home');
     }
 
-    public function showLogin() {
-        $message = $_GET['message'] ?? null;
-        $error = $_GET['error'] ?? null;
-        $this->loadView('login', ['message' => $message, 'error' => $error]);
+    public function showLogin(): void
+    {
+        $this->loadView('login');
     }
 
-    public function showRegister() {
-        $message = $_GET['message'] ?? null;
-        $error = $_GET['error'] ?? null;
-        $this->loadView('register', ['message' => $message, 'error' => $error]);
+    public function showRegister(): void
+    {
+        $this->loadView('register');
     }
 
-    public function doLogin() {
+    public function doLogin(): void
+    {
         $login = $_POST['login'];
         $password = $_POST['password'];
 
-        if (empty($login) || empty($password)) { $this->redirect('login.php?message=Preencha todos os campos.'); }
+        if (empty($login) || empty($password)) { 
+            $this->redirect('login.php?message=Preencha todos os campos.'); 
+        }
 
         $model = new UserModel();
         $user = $model->selectLogin($login);
 
-        if (empty($user)) { $this->redirect('login.php?message=Nenhum usuario foi encontrado.'); }
+        if (empty($user)) { 
+            $this->redirect('login.php?message=Nenhum usuario foi encontrado.'); 
+        }
 
-        if (!password_verify($password, $user->getPassword())) { $this->redirect('login.php?message=Senha incorreta'); }
+        if (!password_verify($password, $user->getPassword())) { 
+            $this->redirect('login.php?message=Senha incorreta'); 
+        }
 
         session_start();
         $_SESSION['user'] = $user;
-        $this->redirect('home.php?message=Login feito com sucesso. Bem-vindo, '. $this->getUserName() .'!');
+        $this->redirect('home.php?message=Login feito com sucesso. Bem-vindo, '. $this->getSessionUser()->getUsername() .'!');
     }
 
-    public function doRegister() {
-        $login = $_POST['login'];
-        $password = $_POST['password'];
+    public function doRegister(): void
+    {
+        $login           = $_POST['login'];
+        $password        = $_POST['password'];
         $confirmPassword = $_POST['confirm_password'];
-        $adminPassword = $_POST['admin_password'];
+        $adminPassword   = $_POST['admin_password'];
 
-        if (empty($login) || empty($password) || empty($confirmPassword) || empty($adminPassword)) { $this->redirect('register.php?message=Preencha todos os campos.'); }
-        if ($password != $confirmPassword) { $this->redirect('register.php?message=As senhas não estão iguais.'); }
+        if (empty($login) || 
+            empty($password) || 
+            empty($confirmPassword) || 
+            empty($adminPassword)) { 
+            $this->redirect('register.php?message=Preencha todos os campos.'); 
+        }
+
+        if ($password != $confirmPassword) { 
+            $this->redirect('register.php?message=As senhas não estão iguais.'); 
+        }
 
         $model = new UserModel();
         try {
-            $admin = $model->selectOneId(new UserVO(1));
+            $admin = $model->selectOne(ADMIN_ID);
             if (!password_verify($adminPassword, $admin->getPassword())) { 
                 $this->redirect('register.php?message=Sem a permissao do administrador.'); 
             }
-            // Finalmente a inserção!
-            $model->insert(new UserVO('', $login, password_hash($password, PASSWORD_DEFAULT)));
+            
+            $model->insert(new User(null, $login, password_hash($password, PASSWORD_DEFAULT)));
         } catch (Exception $e) {
             $this->redirect('register.php?error=Algo de errado ao cadastrar seu usuario.');
         }
 
         $this->redirect('login.php?message=Usuario cadastrado com sucesso! Agora faça login.');
     }
-
 }

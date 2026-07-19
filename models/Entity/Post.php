@@ -13,7 +13,7 @@ final class Post extends Entity {
     private User $user;
     private Channel $channel;
     
-    public function __construct(int $id, string $title, string $content, string $date, User $user, Channel $channel) 
+    public function __construct(?int $id, string $title, string $content, string $date, User $user, Channel $channel) 
     {
         parent::__construct($id);
         $this->title = $title;

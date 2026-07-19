@@ -11,7 +11,7 @@ abstract class Model {
         $this->db = new Database();
     }
 
-    protected function lastId(string $tableName): int
+    public function lastId(string $tableName): int
     {
         $query = "SELECT id 
                     FROM ".$tableName."

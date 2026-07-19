@@ -58,10 +58,10 @@
                                             <textarea cols="20" rows="2"><?php echo $channel->getDescription(); ?></textarea>
                                         </td>
                                         <td>
-                                            <?php echo $channel->getOwnerName(); ?>
+                                            <?php echo $channel->getOwner()->getUsername(); ?>
                                         </td>
                                         <td>
-                                            <?php if ($channel->getOwnerName() == $user) { ?>
+                                            <?php if ($channel->getOwner()->getUsername() == $user) { ?>
                                             <a href="channel_del.php?id=<?php echo $channel->getId(); ?>">
                                                 <button type="button">delete</button>
                                             </a>

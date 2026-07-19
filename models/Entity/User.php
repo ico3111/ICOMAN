@@ -7,7 +7,7 @@ final class User extends Entity {
     private string $username;
     private string $password;
     
-    public function __construct(int $id, string $username, string $password = '')
+    public function __construct(?int $id, string $username, string $password = '')
     {
         parent::__construct($id);
         $this->username = $username;

@@ -31,9 +31,9 @@
                 <tr>
                     <td>
                         <h3>[ <?php echo $channel->getName(); ?> ]</h3>
-                        <textarea rows="5" cols="70" disabled>CRIADO POR: <?php echo $channel->getOwnerName(); ?>. DESCRICAO: <?php echo $channel->getDescription(); ?>. USUARIOS: <?php foreach ($users as $user) { echo $user->getUserName(). ', '; } ?>.
+                        <textarea rows="5" cols="70" disabled>CRIADO POR: <?php echo $channel->getOwner()->getUsername(); ?>. DESCRICAO: <?php echo $channel->getDescription(); ?>. USUARIOS: <?php foreach ($users as $user) { echo $user->getUserName(). ', '; } ?>.
                         </textarea>
-                        <?php if ($channel->getOwner() == $userId): ?>
+                        <?php if ($channel->getOwner()->getId() == $userId): ?>
                             <br><br>
                             <div style="display: flex; justify-content: center;">
                                 <form action="channel_addUser.php" method="post">
