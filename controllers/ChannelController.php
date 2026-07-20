@@ -3,106 +3,77 @@
 namespace Controller;
 
 use Model\ChannelModel;
+use Model\Entity\Channel;
 use Model\UserModel;
-use Model\VO\Channel_userVO;
-use Model\VO\ChannelVO;
-use Model\VO\UserVO;
 
-final class ChannelController extends Controller {
+final class ChannelController extends Controller 
+{
+    public function showChannels(): void
+    {
+        $channelModel = new ChannelModel();
 
-    public function showChannels() {
-        $model = new ChannelModel();
-        $userModel = new UserModel();
-        $data = $model->selectAll(new ChannelVO($this->getUserId()));
-
-        $channels = [];
-        foreach ($data as $channel) {
-            $c = $channel->setOwnerName(
-                $userModel->selectOneId(
-                    new UserVO($channel->getOwner())
-                )->getUsername()
-            );
-            array_push($channels, $c);
-        }
+        $data = $channelModel->selectAll($this->getSessionUser()->getId());
 
         $this->loadView('channels', [
             'channels' => $data,
-            'user' => $this->getUserName()
+            'user' => $this->getSessionUser()->getUsername()
         ]);
     }
 
-    public function addChannel() {
+    public function addChannel(): void
+    {
         $model = new ChannelModel();
-        $model->insert(new ChannelVO('', $_POST['name'], $_POST['description'], $this->getUserId()));
-        $lastId = $model->lastId();
-        $this->addUserToChannel(new Channel_userVO($lastId, $this->getUserId()));
+
+        $model->insert(
+            new Channel(null, $_POST['name'], $_POST['description'], $this->getSessionUser())
+        );
+
+        $lastId = $model->lastId("channels");
+
+        $model->addUserToChannel($this->getSessionUser()->getId(), $lastId);
         $this->redirect('channels.php');
     }
 
-    public function updateChannel() {
+    public function updateChannel(): void
+    {
         // ...
     }
 
-    public function deleteChannel() {
+    public function deleteChannel(): void
+    {
         $model = new ChannelModel();
-        $model->delete(new ChannelVO($_GET['id']));
+
+        $model->delete($_GET['id']);
         $this->redirect('channels.php');
     }
 
-    public function showUsersInChannel() {
+    public function showUsersInChannel(): void
+    {
         // ...
     }
 
-    public function addUserToChannel($vo = '') {
-        $model = new ChannelModel();
-        
-        $isRequestFromPost = false;
-        $userId = 0;
-        $channelId = 0;
-        if (empty($vo)) {
-            $userModel = new UserModel();
-            $isRequestFromPost = true;
-            $userId = $userModel->selectOne(new UserVO('', $_POST['user_name']))->getId();
-            $channelId = $_POST['channel_id'];
-        } else {   
-            $channelId = $vo->getChannelId();
-            $userId = $vo->getUserId();
-        } 
-
-        $model->addUserToChannel(new Channel_userVO($channelId, $userId));
-        if ($isRequestFromPost) {
-            $this->redirect('posts.php?id='. $_POST['channel_id']);
-        } else {
-            $this->redirect('channels.php');
-        }
-
-    }
-    
-    public function removeUserFromChannel() {
+    public function addUserToChannel(): void 
+    {
         $model = new ChannelModel();
         $userModel = new UserModel();
 
-        $isRequestFromPost = false;
-        $name = '';
-        $channel = 0;
-        if (isset($_POST['user_name']) && $_POST['channel_id']) {
-            $isRequestFromPost = true;
-            $name = $_POST['user_name'];
-            $channel = $_POST['channel_id'];
-        } else {
-            $name = $_GET['user'];
-            $channel = $_GET['channel'];
-        }
+        $userId = $userModel->selectLogin($_POST['user_name'])->getId();
 
-        $userId = $userModel->selectOne(new UserVO('', $name))->getId();
-        $model->deleteUserFromChannel(new Channel_userVO($channel, $userId));
-
-        if ($isRequestFromPost) {
-            $this->redirect('posts.php?id='. $_POST['channel_id']);
-        } else {
-            $this->redirect('channels.php');
-        }
-        
+        $model->addUserToChannel($userId, $_POST['channel_id']);
+        $this->redirect('posts.php?id='. $_POST['channel_id']);
     }
+    
+    public function removeUserFromChannel(): void
+    {
+        $model = new ChannelModel();
+        $userModel = new UserModel();
 
+        $name = isset($_GET['user']) ? $_GET['user'] : $_POST['user_name'];
+        $channel = isset($_GET['channel']) ? $_GET['channel'] : $_POST['channel_id'];
+
+        $userId = $userModel->selectLogin($name)->getId();
+        $model->deleteUserFromChannel($userId, $channel);
+        
+        $this->redirect('posts.php?id='. $channel);
+    }
 }

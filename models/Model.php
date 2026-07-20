@@ -3,15 +3,29 @@
 namespace Model;
 
 abstract class Model {
+    
+    protected Database $db;
+    
+    public function __construct() 
+    {
+        $this->db = new Database();
+    }
 
-    abstract public function selectAll($vo);
+    public function lastId(string $tableName): int
+    {
+        $query = "SELECT id 
+                    FROM ".$tableName."
+                   ORDER BY id DESC LIMIT 1";
+                   
+        $data = $this->db->select($query);
 
-    abstract public function selectOne($vo);
-    
-    abstract public function insert($vo);
-    
-    abstract public function update($vo);
-    
-    abstract public function delete($vo);
+        return $data[0][0];
+    }
+
+    abstract public function selectAll(int $id): array;
+    abstract public function selectOne(int $id);
+    abstract public function insert($entity): void;
+    abstract public function update($entity): void;
+    abstract public function delete(int $id): void;
     
 }

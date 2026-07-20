@@ -2,7 +2,9 @@
 
 namespace Controller;
 
-require_once __DIR__ . './../config.php';
+use Model\Entity\User;
+
+require_once('./../config.php');
 
 abstract class Controller {
 
@@ -12,19 +14,22 @@ abstract class Controller {
     }
     
     public function loadView($url, $data = []) {
+        echo assemblePageTop($url, "style");
+        // Captura e erros ou menssagens na URL
+        $data[] = [$_GET['message'] ?? null, $_GET['error'] ?? null];
+        
         extract($data);
-        include('views/'. $url .'.php');
+        include('./../pages/'. $url .'.php');
+
+        echo assemblePageFooter();
     }
 
-    public function getUserId() {
-        if (isset($_SESSION['user'])) {
-            return $_SESSION['user']->getId();
-        }
-    }
-
-    public function getUserName() {
-        if (isset($_SESSION['user'])) {
-            return $_SESSION['user']->getUsername();
-        }
+    public function getSessionUser(): User
+    {
+        return new User(
+            $_SESSION['user']->getId(),
+            $_SESSION['user']->getUsername(),
+            $_SESSION['user']->getPassword()
+        );
     }
 }

@@ -1,0 +1,11 @@
+- Tipar : somar(int $a, int $b): int
+- Adicionar metodo nos VOs para que eles se construam a partir de um array de dados. EX.:
+    public static function fromArray(array $row): self
+    {
+        return new self(
+            $row['id'],
+            $row['board_name'],
+            $row['board_description'],
+            $row['board_owner']
+        );
+    }

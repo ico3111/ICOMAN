@@ -3,78 +3,86 @@
 namespace Controller;
 
 use Model\ChannelModel;
+use Model\Entity\Post;
 use Model\PostModel;
-use Model\UserModel;
-use Model\VO\Channel_userVO;
-use Model\VO\ChannelVO;
-use Model\VO\PostVO;
-use Model\VO\UserVO;
 
 final class PostController extends Controller {
 
-    public function showPosts() {
+    public function showPosts(): void
+    {
         $model = new PostModel();
         $channelModel = new ChannelModel();
-        $userModel = new UserModel();
 
-        if (!$channelModel->isUserInChannel(new Channel_userVO($_GET['id'], $this->getUserId()))) {
+        $channelId = $_GET['id'];
+
+        if (!$channelModel->isUserInChannel($this->getSessionUser()->getId(), $channelId)) {
             $this->redirect('channels.php?message=Sem permissao');
         }
 
-        $data = $model->selectAll(new PostVO(
-            '',
-            '',
-            '',
-            '',
-            '',
-            $_GET['id']
-        ));
-        
-        $channel = $channelModel->selectOne(new ChannelVO($_GET['id']));
-        $channel->setOwnerName(
-            $userModel->selectOneId(
-                new UserVO($channel->getOwner())
-            )->getUsername()
-        );
-
-        $users = $channelModel->selectUsersInChannel(new ChannelVO($_GET['id']));
+        $data = $model->selectAll($channelId);
+        $channel = $channelModel->selectOne($channelId);
+        $users = $channelModel->selectUsersInChannel($channelId);
 
         $this->loadView('posts', [
             'posts' => $data,
             'channel' => $channel,
             'users' => $users,
-            'userId' => $this->getUserId()
+            'userId' => $this->getSessionUser()->getId()
         ]);
     }
     
-    public function addPost() {
+    public function addPost(): void
+    {
         date_default_timezone_set('America/Sao_Paulo');
         $model = new PostModel();
-        $model->insert(new PostVO(
-            '', 
+        $channelModel = new ChannelModel();
+
+        $model->insert(new Post(
+            null, 
             $_POST['title'], 
             $_POST['content'], 
             date("Y-m-d"), 
-            $this->getUserId(), 
-            $_POST['channel_id'],
-            $this->getUsername()
+            $this->getSessionUser(), 
+            $channelModel->selectOne($_POST['channel_id'])
         ));
+
         $this->redirect('posts.php?id='.$_POST['channel_id']);
     }
 
-    public function updatePost() {
-        if (isset($_POST['deletePost'])) { $this->redirect('post_del.php?id='.$_POST['id'].'&channel_id='.$_POST['channel_id']); }
-        if (empty($_POST['title']) || empty($_POST['content'])) { $this->redirect('posts.php?id='.$_POST['id'].'&message=Preencha os campos obrigatorios.'); }
+    public function updatePost(): void
+    {
+        // Se for exclusao redireciona
+        if (isset($_POST['deletePost'])) { 
+            $this->redirect('post_del.php?id='.$_POST['id'].
+                            '&channel_id='.$_POST['channel_id']); 
+        }
+
+        if (empty($_POST['title']) || empty($_POST['content'])) { 
+            $this->redirect('posts.php?id='.$_POST['channel_id'].
+                            '&message=Preencha os campos obrigatorios.'); 
+        }
         
         date_default_timezone_set('America/Sao_Paulo');
         $model = new PostModel();
-        $model->update(new PostVO($_POST['id'], $_POST['title'], $_POST['content'], date("Y-m-d")));
+        $channelModel = new ChannelModel();
+
+        $model->update(new Post(
+            $_POST['id'], 
+            $_POST['title'], 
+            $_POST['content'], 
+            date("Y-m-d"),
+            $this->getSessionUser(),
+            $channelModel->selectOne($_POST['channel_id'])
+        ));
+
         $this->redirect('posts.php?id='.$_POST['channel_id']);
     }
 
-    public function deletePost() {
+    public function deletePost(): void
+    {
         $model = new PostModel();
-        $model->delete(new PostVO($_GET['id']));
+
+        $model->delete($_GET['id']);
         $this->redirect('posts.php?id='.$_GET['channel_id']);
     }
     

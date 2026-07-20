@@ -2,48 +2,83 @@
 
 namespace Model;
 
-use Model\VO\UserVO;
+use Model\Entity\User;
 
-final class UserModel extends Model {
+final class UserModel extends Model
+{
+    public function selectAll(int $userId): array
+    {
+        $query = "SELECT users.*
+                    FROM users
+                   WHERE id = :id";
 
-    public function selectAll($vo) {
-        $db = new Database();
-        $query = "SELECT * FROM users WHERE id = :id";
-        $data = $db->select($query, [':id' => $vo->getId()]);
+        $data = $this->db->select($query, [':id' => $userId]);
 
-        $arrayDados = [];
-        foreach ($data as $row) {
-            array_push($arrayDados, new UserVO($row['id'], $row['user_name'], $row['user_password']));
-        }
-
-        return $arrayDados;
+        return User::fromCollection($data);
     }
 
-    public function selectOne($vo) {
-        $db = new Database();
-        $query = "SELECT id, user_name, user_password FROM users WHERE user_name = :user_name";
-        $data = $db->select($query, [':user_name' => $vo->getUsername()]);
-        return new UserVO($data[0]['id'], $data[0]['user_name'], $data[0]['user_password']);
+    public function selectOne(int $userId): ?User
+    {
+        $query = "SELECT users.*
+                    FROM users
+                   WHERE users.id = :id";
+
+        $data = $this->db->select($query, [':id' => $userId]);
+
+        if (empty($data)) { return null; }
+
+        return User::fromArray($data[0]);
     }
 
-    public function selectOneId($vo) {
-        $db = new Database();
-        $query = "SELECT id, user_name, user_password FROM users WHERE id = :id";
-        $data = $db->select($query, [':id' => $vo->getId()]);
-        return new UserVO($data[0]['id'], $data[0]['user_name'], $data[0]['user_password']);
+    public function selectLogin(string $userName): ?User
+    {
+        $query = "SELECT users.*
+                    FROM users
+                   WHERE users.user_name = :user_name";
+
+        $data = $this->db->select($query, [':user_name' => $userName]);
+
+        if (empty($data)) { return null; }
+
+        return User::fromArray($data[0]);
     }
-    
-    public function insert($vo) {
-        $db = new Database();
-        $query = "INSERT INTO users(user_name, user_password) VALUES (:user_name, :user_password)";
-        $db->execute($query, [':user_name' => $vo->getUsername(), ':user_password' => $vo->getPassword()]);
+
+    public function insert($user): void
+    {
+        $query = "INSERT
+                    INTO users(user_name, user_password)
+                  VALUES (:user_name, :user_password)";
+
+        $binds = [
+            ':user_name' => $user->getUsername(),
+            ':user_password' => $user->getPassword()
+        ];
+
+        $this->db->execute($query, $binds);
     }
-    
-    public function update($vo) {
-        // ...
+
+    public function update($user): void
+    {
+        $query = "UPDATE users
+                     SET user_name = :user_name,
+                         user_password = :user_password
+                   WHERE id = :id";
+
+        $binds = [
+            ':user_name' => $user->getUsername(),
+            ':user_password' => $user->getPassword(),
+            ':id' => $user->getId()
+        ];
+
+        $this->db->execute($query, $binds);
     }
-    
-    public function delete($vo) {
-        // ...
+
+    public function delete(int $userId): void
+    {
+        $query = "DELETE
+                    FROM users
+                   WHERE id = :id";
+
+        $this->db->execute($query, [':id' => $userId]);
     }
 }

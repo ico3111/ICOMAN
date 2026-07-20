@@ -2,153 +2,137 @@
 
 namespace Model;
 
-use Model\VO\Channel_userVO;
-use Model\VO\ChannelVO;
-use Model\VO\UserVO;
+use Model\Entity\Channel;
+use Model\Entity\User;
 
-final class ChannelModel {
+final class ChannelModel extends Model 
+{
+    public function selectAll(int $userId): array 
+    {
+        $query = "SELECT channels.*
+                    FROM channels
+                    JOIN channel_user
+                      ON channels.id = channel_user.channel_id
+                   WHERE channel_user.user_id = :id";
 
-    public function selectAll($vo) {
-        $db = new Database();
-        $query = "SELECT c.id, c.channel_name, c.channel_description, c.channel_owner
-                    FROM channels AS c
-                    JOIN channel_user AS cu
-                      ON c.id = cu.channel_id
-                   WHERE cu.user_id = :id";
-        $data = $db->select($query, [':id' => $vo->getId()]);
+        $data = $this->db->select($query, [':id' => $userId]);
 
-        $arrayDados = [];
-        foreach ($data as $row) {
-            array_push($arrayDados, new ChannelVO(
-                $row['id'], 
-                $row['channel_name'], 
-                $row['channel_description'], 
-                $row['channel_owner']
-            ));
-        }
-
-        return $arrayDados;
+        return Channel::fromCollection($data);
     }
 
-    public function selectOne($vo) {
-        $db = new Database();
-        $query = "SELECT c.id, c.channel_name, c.channel_description, c.channel_owner
-                    FROM channels AS c
-                   WHERE c.id = :id";
-        $data = $db->select($query, [':id' => $vo->getId()]);
+    public function selectOne(int $channelId): ?Channel 
+    {
+        $query = "SELECT channels.*
+                    FROM channels
+                   WHERE channels.id = :id";
 
-        return new ChannelVO(
-            $data[0]['id'], 
-            $data[0]['channel_name'], 
-            $data[0]['channel_description'], 
-            $data[0]['channel_owner']
-        );
+        $data = $this->db->select($query, [':id' => $channelId]);
+
+        if (empty($data)) { return null; }
+
+        return Channel::fromArray($data[0]);
     }
 
-    public function insert($vo) {
-        $db = new Database();
-        $query = "INSERT INTO channels(channel_name, channel_description, channel_owner) VALUES (:channel_name, :channel_description, :channel_owner)";
+    public function insert($channel): void
+    {
+        $query = "INSERT 
+                    INTO channels(channel_name, channel_description, channel_owner) 
+                  VALUES (:channel_name, :channel_description, :channel_owner)";
+        
         $binds = [
-            ':channel_name' => $vo->getName(), 
-            ':channel_description' => $vo->getDescription(), 
-            ':channel_owner' => $vo->getOwner()
+            ':channel_name' => $channel->getName(), 
+            ':channel_description' => $channel->getDescription(), 
+            ':channel_owner' => $channel->getOwner()->getId()
         ];
 
-        $db->execute($query, $binds);
+        $this->db->execute($query, $binds);
     }
     
-    public function update($vo) {
-        $db = new Database();
+    public function update($channel): void
+    {
         $query = "UPDATE channels 
                      SET channel_name = :channel_name, 
                          channel_description = :channel_description, 
                          channel_owner = :channel_owner
                    WHERE id = :id";
+
         $binds = [
-            ':channel_name' => $vo->getName(), 
-            ':channel_description' => $vo->getDescription(), 
-            ':channel_owner' => $vo->getOwner(), 
-            ':id' => $vo->getId()
+            ':channel_name' => $channel->getName(), 
+            ':channel_description' => $channel->getDescription(), 
+            ':channel_owner' => $channel->getOwner()->getId(), 
+            ':id' => $channel->getId()
         ];
         
-        $db->execute($query, $binds);
-        
+        $this->db->execute($query, $binds);
     }
 
-    public function delete($vo) {
-        $db = new Database();
+    public function delete(int $channelId): void
+    {
         $query = "DELETE FROM channels WHERE id = :id";
-        $db->execute($query, [':id' => $vo->getId()]);
+
+        $this->db->execute($query, [':id' => $channelId]);
     }
 
-    public function selectUsersInChannel($vo) {
-        $db = new Database();
-        $query = "SELECT u.user_name
-                    FROM channel_user AS cu
-                    JOIN users AS u
-                    ON u.id = cu.user_id
-                    WHERE cu.channel_id = :channel_id";
+    #+
+    #+ Matutenção de usuários nos Channels
+    #+
+
+    public function selectUsersInChannel(int $channelId): array 
+    {
+        $query = "SELECT users.*
+                    FROM channel_user
+                    JOIN users
+                      ON users.id = channel_user.user_id
+                   WHERE channel_user.channel_id = :channel_id";
         
-        $data = $db->select($query, [
-            ':channel_id' => $vo->getId()
-        ]);
+        $data = $this->db->select($query, [':channel_id' => $channelId]);
 
-        $arrayDados = [];
-        foreach ($data as $row) {
-            array_push($arrayDados, new UserVO(
-                '', 
-                $row['user_name'], 
-            ));
-        }
-
-        return $arrayDados;
+        return User::fromCollection($data);
     }
 
-    public function isUserInChannel($vo) {
-        $db = new Database();
-        $query = "SELECT * FROM channel_user WHERE channel_id = :channel_id AND user_id = :user_id";
-        $data = $db->select($query, [
-            ':channel_id' => $vo->getChannelId(), 
-            ':user_id' => $vo->getUserId()
-        ]);
+    public function isUserInChannel(int $userId, int $channelId): bool 
+    {
+        $query = "SELECT 1 
+                    FROM channel_user 
+                   WHERE channel_id = :channel_id 
+                     AND user_id = :user_id";
 
-        $arrayDados = [];
-        foreach ($data as $row) {
-            array_push($arrayDados, new Channel_userVO(
-                $row['channel_id'], 
-                $row['user_id'], 
-            ));
-        }
-
-        return empty($arrayDados) ? false : true;
-    }
-
-    public function addUserToChannel($vo) {
-        $db = new Database();
-        $query = "INSERT INTO channel_user(channel_id, user_id) VALUES (:channel_id, :user_id)";
         $binds = [
-            ':channel_id' => $vo->getChannelId(), 
-            ':user_id' => $vo->getUserId()
+            ':user_id' => $userId,
+            ':channel_id' => $channelId 
         ];
 
-        $db->execute($query, $binds);
+        $data = $this->db->select($query, $binds);
+
+        return !empty($data);
     }
 
-    public function deleteUserFromChannel($vo) {
-        $db = new Database();
-        $query = "DELETE FROM channel_user WHERE channel_id = :channel_id AND user_id = :user_id";
+    public function addUserToChannel(int $userId, int $channelId): void
+    {
+        $query = "INSERT 
+                    INTO channel_user(channel_id, user_id) 
+                  VALUES (:channel_id, :user_id)";
+
         $binds = [
-            ':channel_id' => $vo->getChannelId(), 
-            ':user_id' => $vo->getUserId()
+            ':user_id' => $userId,
+            ':channel_id' => $channelId
         ];
 
-        $db->execute($query, $binds);
+        $this->db->execute($query, $binds);
     }
-    
-    public function lastId() {
-        $db = new Database();
-        $query = "SELECT id FROM channels ORDER BY id DESC LIMIT 1";
-        $data =$db->select($query);
-        return $data[0][0];
+
+    public function deleteUserFromChannel(int $userId, int $channelId): void
+    {
+        $query = "DELETE 
+                    FROM channel_user 
+                   WHERE channel_id = :channel_id 
+                     AND user_id = :user_id";
+
+        $binds = [
+            ':user_id' => $userId,
+            ':channel_id' => $channelId
+        ];
+
+        $this->db->execute($query, $binds);
     }
 }
