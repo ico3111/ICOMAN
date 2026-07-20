@@ -56,24 +56,24 @@
                                             <form action="post_edit.php" method="post">
                                             <tr>
                                                 <td colspan="2">
-                                                    <?php if ($channel->getOwner() == $userId || $post->getUserId() == $userId): ?>
+                                                    <?php if ($channel->getOwner()->getId() == $userId || $post->getUser()->getId() == $userId): ?>
                                                     <input type="hidden" name="id" value="<?php echo $post->getId(); ?>">
                                                     <input type="hidden" name="channel_id" value="<?php echo $_GET['id']; ?>">
                                                     <?php endif; ?>
                                                     <textarea name="title" cols="25" rows="1"><?php echo $post->getTitle(); ?></textarea>
                                                 </td>
                                                 <td>
-                                                    <?php echo $post->getUserName(); ?>
+                                                    <?php echo $post->getUser()->getUsername(); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $post->getDate(); ?>
                                                 </td>
                                                 <td>
-                                                    <?php if ($channel->getOwner() == $userId && $post->getUserId() != $userId) { ?>
+                                                    <?php if ($channel->getOwner()->getId() == $userId && $post->getUser()->getId() != $userId) { ?>
                                                         <button type="submit" name="deletePost">Delete</button>      
                                                     <?php } ?>
 
-                                                    <?php if ($post->getUserId() == $userId) { ?>
+                                                    <?php if ($post->getUser()->getId() == $userId) { ?>
                                                         <button type="submit" name="editPost">Update</button>
                                                         <button type="submit" name="deletePost">Delete</button>
                                                     <?php } ?>

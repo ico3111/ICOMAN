@@ -20,12 +20,6 @@ final class PostController extends Controller {
         }
 
         $data = $model->selectAll($channelId);
-        echo '<pre>';
-        print_r($data);
-        echo '</pre>';
-        die;
-        $data = Post::fromCollection($data);
-
         $channel = $channelModel->selectOne($channelId);
         $users = $channelModel->selectUsersInChannel($channelId);
 

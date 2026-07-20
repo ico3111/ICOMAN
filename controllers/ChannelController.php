@@ -52,11 +52,14 @@ final class ChannelController extends Controller
         // ...
     }
 
-    public function addUserToChannel(int $userId, $channelId): void 
+    public function addUserToChannel(): void 
     {
         $model = new ChannelModel();
+        $userModel = new UserModel();
 
-        $model->addUserToChannel($userId, $channelId);
+        $userId = $userModel->selectLogin($_POST['user_name'])->getId();
+
+        $model->addUserToChannel($userId, $_POST['channel_id']);
         $this->redirect('posts.php?id='. $_POST['channel_id']);
     }
     
@@ -65,12 +68,12 @@ final class ChannelController extends Controller
         $model = new ChannelModel();
         $userModel = new UserModel();
 
-        $name = $_GET['user'];
-        $channel = $_GET['channel'];
+        $name = isset($_GET['user']) ? $_GET['user'] : $_POST['user_name'];
+        $channel = isset($_GET['channel']) ? $_GET['channel'] : $_POST['channel_id'];
 
         $userId = $userModel->selectLogin($name)->getId();
         $model->deleteUserFromChannel($userId, $channel);
         
-        $this->redirect('posts.php?id='. $_POST['channel_id']);
+        $this->redirect('posts.php?id='. $channel);
     }
 }

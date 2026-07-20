@@ -15,7 +15,7 @@ final class Task extends Entity {
     private User $user;
     private Board $board;
     
-    public function __construct(int $id, string $title, string $description, string $deadline, bool $isChecked, User $user, Board $board) 
+    public function __construct(?int $id, string $title, string $description, string $deadline, bool $isChecked, User $user, Board $board) 
     {
         parent::__construct($id);
         $this->title = $title;

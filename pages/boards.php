@@ -58,15 +58,15 @@
                                             <textarea cols="20" rows="2"><?php echo $board->getDescription(); ?></textarea>
                                         </td>
                                         <td>
-                                            <?php echo $board->getOwnerName(); ?>
+                                            <?php echo $board->getOwner()->getUsername(); ?>
                                         </td>
                                         <td>
-                                            <?php if ($board->getOwnerName() == $user) { ?>
-                                            <a href="<?=CHANNEL_DEL?>?id=<?php echo $board->getId(); ?>">
+                                            <?php if ($board->getOwner()->getUsername() == $user) { ?>
+                                            <a href="<?=BOARD_DEL?>?id=<?php echo $board->getId(); ?>">
                                                 <button type="button">delete</button>
                                             </a>
                                             <?php } else { ?>
-                                            <a href="<?=CHANNEL_DEL_USER?>?user=<?php echo $user; ?>&channel=<?php echo $board->getId(); ?>">
+                                            <a href="<?=BOARD_DEL_USER?>?user=<?php echo $user; ?>&board=<?php echo $board->getId(); ?>">
                                                 <button type="button">Quit</button>
                                             </a>
                                             <?php } ?>
