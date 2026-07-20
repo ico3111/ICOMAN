@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10/07/2025 às 01:20
+-- Tempo de geração: 20/07/2026 às 03:24
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `studyhub`
+-- Banco de dados: `icoman`
 --
 
 -- --------------------------------------------------------
@@ -73,35 +73,6 @@ CREATE TABLE `channel_user` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `day`
---
-
-CREATE TABLE `day` (
-  `id` int(11) NOT NULL,
-  `day_name` date NOT NULL,
-  `day_description` text DEFAULT NULL,
-  `day_isSuccess` tinyint(4) NOT NULL DEFAULT 0,
-  `habit_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `habits`
---
-
-CREATE TABLE `habits` (
-  `id` int(11) NOT NULL,
-  `habit_name` varchar(50) NOT NULL,
-  `habit_description` text DEFAULT NULL,
-  `habit_goal` int(11) NOT NULL,
-  `habit_start` date NOT NULL,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `posts`
 --
 
@@ -111,8 +82,7 @@ CREATE TABLE `posts` (
   `post_content` text NOT NULL,
   `post_date` date NOT NULL,
   `user_id` int(11) NOT NULL,
-  `channel_id` int(11) NOT NULL,
-  `user_name` varchar(50) NOT NULL
+  `channel_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -128,7 +98,7 @@ CREATE TABLE `tasks` (
   `task_deadline` date DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `board_id` int(11) NOT NULL,
-  `is_checked` varchar(2) DEFAULT NULL
+  `is_checked` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -184,20 +154,6 @@ ALTER TABLE `channel_user`
   ADD KEY `channel_user_ibfk_2` (`user_id`);
 
 --
--- Índices de tabela `day`
---
-ALTER TABLE `day`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `habit_id` (`habit_id`);
-
---
--- Índices de tabela `habits`
---
-ALTER TABLE `habits`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
-
---
 -- Índices de tabela `posts`
 --
 ALTER TABLE `posts`
@@ -228,49 +184,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `boards`
 --
 ALTER TABLE `boards`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `board_user`
 --
 ALTER TABLE `board_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `channels`
 --
 ALTER TABLE `channels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT de tabela `day`
---
-ALTER TABLE `day`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `habits`
---
-ALTER TABLE `habits`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de tabela `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de tabela `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restrições para tabelas despejadas
@@ -301,18 +245,6 @@ ALTER TABLE `channels`
 ALTER TABLE `channel_user`
   ADD CONSTRAINT `channel_user_ibfk_1` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `channel_user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
-
---
--- Restrições para tabelas `day`
---
-ALTER TABLE `day`
-  ADD CONSTRAINT `day_ibfk_1` FOREIGN KEY (`habit_id`) REFERENCES `habits` (`id`);
-
---
--- Restrições para tabelas `habits`
---
-ALTER TABLE `habits`
-  ADD CONSTRAINT `habits_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Restrições para tabelas `posts`
