@@ -1,0 +1,20 @@
+td {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.wall-cel {
+    background-color: maroon;
+}
+.apple-cel {
+    background-color: red;
+}
+.snake-cel {
+    background-color: blueviolet;
+}
+.void-cel {
+    background-color: limegreen;
+}
+.virtualKey {
+    padding: 20px;
+}

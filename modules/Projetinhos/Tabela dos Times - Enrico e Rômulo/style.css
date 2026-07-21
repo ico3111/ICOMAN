@@ -1,0 +1,44 @@
+* {padding: 0; margin: 0; box-sizing: border-box;}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    background-color: #222;
+    color: #00ffa2;
+}
+
+#tabela {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+#tabela > table {
+    border-collapse: collapse;
+    text-align: center;
+    vertical-align: middle;
+}
+#tabela td, #tabela th {border: 2px solid #00ffa2; padding: 10px}
+#times {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+#times > table {
+    border: 2px solid #00ffa2;
+    border-radius: 8px;
+    padding: 10px;
+    border-spacing: 15px; /*espaçamento entre as 'tr'*/
+}
+input {
+    border: 2px solid #00ffa2;
+    border-radius: 8px;
+    padding: 5px;
+    background-color: #222;
+    color:#00ffa2;
+}

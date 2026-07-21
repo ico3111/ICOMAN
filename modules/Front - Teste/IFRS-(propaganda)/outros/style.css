@@ -1,0 +1,43 @@
+/*ALL/BIBLIOTECA*/
+
+#h11{
+    text-align: center; font-size: xx-large; text-decoration: underline dotted lime; 
+}
+#img1{
+    height: 500px; width: 800px; 
+}
+#div1{
+    text-align: center;
+}
+#span1{
+    background-color: lime; color: red; padding: 2px; font-size: x-large; border-radius: 20px;;
+}
+#a1{
+    color:red; text-decoration: none;
+}
+#span1:hover{
+    background-color: cadetblue; color:white
+}
+#div2{
+    text-align: center;
+}
+#div3{
+    font-size:x-large; font-style: arial; margin-left: 30px;
+}
+
+
+/*CURSOS*/
+
+table,td,th{
+    border-width:1px; border-style: solid; border-color:black;
+}
+table{
+    margin:auto
+}
+
+
+/*refeitório*/
+
+#table1r{
+    text-align: center
+}

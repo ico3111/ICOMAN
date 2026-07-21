@@ -1,0 +1,12 @@
+label{
+    text-decoration: underline aqua; font-weight: 600;
+}
+#resul{
+    color: lime; background-color: black;
+}
+fieldset{
+    width: 20%; margin: auto;
+}
+*{
+    text-align:center
+}

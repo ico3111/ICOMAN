@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Obmep</title>
+</head>
+<body>
+    <nav>
+        <h2>Suas Preferências</h2>
+        <ul>
+            <li>
+                <label for="ano">Ano:</label>
+                <select id="selectAno">
+                    <option value="random">
+                        Aleatório
+                    </option>
+                </select>
+            </li>
+            <li>
+                <label for="ano">Nível:</label>
+                <select id="selectNivel">
+                    <option value="random">
+                        Aleatório
+                    </option>
+                    <option value="1">
+                        Nivel 1
+                    </option>
+                    <option value="2">
+                        Nivel 2
+                    </option>
+                    <option value="3">
+                        Nivel 3
+                    </option>
+                </select>
+            </li>
+            <li>
+                <label for="ano">Fase:</label>
+                <select id="selectFase">
+                    <option value="random">
+                        Aleatório
+                    </option>
+                    <option value="1">
+                        Fase 1
+                    </option>
+                    <option value="2">
+                        Fase 2
+                    </option>
+                </select>
+            </li>
+        </ul>
+    </nav>
+    <menu>
+        <span>
+            <Button id="sortear">Sortear Questão</Button>
+        </span>
+        <span>
+            <table id="table"></table>
+        </span>
+        <a href="https://www.obmep.org.br/provas.htm" style="display: none;" class="btn" id="irParaQuestao">
+            Ir para a Questão
+        </a>
+    </menu>
+    
+    <script src="./obmep.js"></script>
+</body>
+</html>

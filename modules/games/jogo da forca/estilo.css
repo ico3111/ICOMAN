@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    background-color: blueviolet;
+}
+#container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    height: 80vh;
+    padding: 10px;
+    border: solid black 2px;
+    border-radius: 8px;
+    background-color: white;
+}
+#palavras{
+    display: flex;
+}
+.letra{
+    font-size: 40px;
+    margin-right: 5px;
+}
+#teclado{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 20%;
+}
+.tecla{
+    height: 30px;
+    width: 30px;
+}
+.tecla_usada{
+    background-color: aqua;
+    height: 30px;
+    width: 30px;
+    color: black;
+    border: solid black 2px;
+}

@@ -1,0 +1,10 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map{
+    padding: 50px;
+    border:1px solid black;
+}

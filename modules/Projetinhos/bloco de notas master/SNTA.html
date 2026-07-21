@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./bloco.jpg" type="image/x-icon">
+    <title>Supreme Nota-taking App</title>
+    <style>
+        * {padding: 0; margin: 0; box-sizing: border-box;}
+        
+        body {
+          height: 100vh;
+          width: 100vw;
+          padding: 5px;
+        }
+        
+        #livrosDiv {
+          height: 40vh;
+          width: 100%;
+          padding: 5px;
+          overflow: auto;
+          border: 1px solid black;
+        }
+        
+        #livros, .livroDiv, #escreverDiv {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 10px;
+        }
+        
+        .livroDiv {
+          width: 80%;
+          border: 1px solid black;
+          border-radius: 8px;
+        }
+        
+        .livroDiv > ol {
+          list-style: upper-roman;
+        }
+        
+        #escreverDiv > textarea {
+          height: 40vh;
+          width: 100%;
+        }
+        
+        button {
+          background-color: #e9e9ed;
+          padding: 2px;
+          border: 1px solid black;
+          margin-bottom: 10px;
+        }
+
+        button:hover {
+          background-color: cornflowerblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Super Bloco de Notas</h1>
+    <br>
+    <div id="livrosDiv">
+        <h2>Seus blocos:</h2>
+        <button id="criarLivroBtn">Criar Bloco</button>
+        <div id="livros"></div>
+    </div>
+    <br>
+    <div id="escreverDiv"></div>
+    <script>
+        let livros = [];
+        
+        function criarLivro() {
+          let livroName = prompt("Digite o nome do bloco:");
+          if (livroName) {
+            let livro = {name: livroName, notas: []};
+            livros.push(livro);
+            localStorage.setItem('livros', JSON.stringify(livros)); 
+            carregarLivros();
+          }
+        }
+        
+        function carregarLivros() {
+          const livrosDiv = document.getElementById('livros');
+          livrosDiv.innerHTML = '';
+          livros.forEach((livro, index) => {
+              const livroDiv = document.createElement('div');
+              livroDiv.classList.add('livroDiv');
+              livroDiv.innerHTML = `<h2>${livro.name}</h2>`;
+              const notas = document.createElement('ol');
+              livro.notas.forEach((nota, notaIndex) => {
+                const notaItem = document.createElement('li');
+                const notaLink = document.createElement('a');
+                notaLink.href = '#';
+                notaLink.textContent = nota.name;
+                notaLink.addEventListener('click', () => abrirNota(index, notaIndex));
+                notaItem.appendChild(notaLink);
+                notas.appendChild(notaItem);
+              });
+              livroDiv.appendChild(notas);
+              const btnAddNota = document.createElement('button');
+              btnAddNota.textContent = 'Adicionar bloco';
+              btnAddNota.addEventListener('click', () => criarNota(index));
+              livroDiv.appendChild(btnAddNota);
+              livrosDiv.appendChild(livroDiv);
+          });
+        }
+        
+        function criarNota(livroIndex) {
+          let notaName = prompt("Digite o nome do assunto/anotação: ");
+          if (notaName) {
+            livros[livroIndex].notas.push({ name: notaName, content: "" });
+            localStorage.setItem('livros', JSON.stringify(livros)); 
+            carregarLivros();
+          }
+        }
+        
+        function abrirNota(livroIndex, notaIndex) {
+          const nota = livros[livroIndex].notas[notaIndex];
+          const escreverDiv = document.getElementById('escreverDiv');
+          escreverDiv.innerHTML = '';
+          const textarea = document.createElement('textarea');
+          textarea.textContent = nota.content;
+          const btn = document.createElement('button');
+          btn.textContent = 'Salvar nota';
+          btn.addEventListener('click', () => {
+            nota.content = textarea.value;
+            localStorage.setItem('livros', JSON.stringify(livros)); 
+            escreverDiv.innerHTML = '';
+          });
+          escreverDiv.appendChild(textarea);
+          escreverDiv.appendChild(btn);
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+          if (localStorage.getItem('livros')) {
+            livros = JSON.parse(localStorage.getItem('livros'));
+            carregarLivros();
+          }
+          document.getElementById('criarLivroBtn').addEventListener('click', criarLivro);
+        });
+    </script>
+</body>
+</html>

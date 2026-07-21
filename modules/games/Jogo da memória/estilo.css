@@ -1,0 +1,37 @@
+* {margin:0; padding: 0; box-sizing: border-box;}
+body {height: 100%; min-height: 100vh; display: flex; justify-content: center; align-items: center;}
+
+#comecar {
+    border-radius: 6px; border-width: 0; background-color: blueviolet; font-size: 30pt; box-shadow: 3px 3px 5px rgb(79, 25, 129);
+    color: white; font-weight: bold; padding: 10px; cursor: pointer;
+}
+
+#app{display: flex; flex-wrap: wrap;}
+#app>button{flex: 1 0 22%}
+
+button{
+    transition: transform 0.3s ease-in-out;
+    margin: 3px;
+    padding: 8px;
+    font-size: 24px;
+    background-color: #eee;
+    cursor: pointer;
+    background-color: rgb(24, 127, 153);
+    color: #000000;
+    box-shadow: 3px 3px 5px rgb(0, 0, 0);
+}
+
+button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: rgb(15, 158, 184);
+    color: rgb(255, 255, 255);
+}
+
+.card-flipped.correct {
+    background-color: #3ac1eb;
+    color: #000;
+    transform: none;
+    transition: none;
+    cursor: auto;
+}

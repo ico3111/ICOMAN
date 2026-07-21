@@ -22,6 +22,7 @@ define("ENDPOINTS_URL", URL_ROOT . "/view/");
 define("STYLES_URL",    URL_ROOT . "/pages/styles");
 define("SCRIPTS_URL",   URL_ROOT . "/pages/scripts");
 define("MEDIA_URL",     URL_ROOT . "/media");
+define("MODULES", URL_ROOT . "/modules");
 
 #+
 #+ ENDPOINTS DO SISTEMA

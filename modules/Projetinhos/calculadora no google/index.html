@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./index.js">
+    <title>calculadora</title>
+</head>
+<script>
+    function ativar(){
+    var modo = Number(document.getElementById("modo").value);
+    var n1 = Number(document.getElementById("n1").value);
+    var n2 = Number(document.getElementById("n2").value);
+    var resul= document.getElementById("resul");
+    if(modo==1){
+        var vezes=n1*n2;
+        resul.innerHTML = vezes;
+    }else if(modo==2){
+        var dividir= n1/n2;
+        resul.innerHTML = dividir;
+    }
+    }
+    function limpar() {
+        document.getElementById("n1").value = "";
+        document.getElementById("n2").value = "";
+        document.getElementById("resul").innerHTML = "";
+    }
+</script>
+<body>
+    <h1>bem-vindo a calculadora de menos e dividir</h1>
+    <br>
+    <select id="modo">
+        <option value="1">
+            Multiplicação
+        </option>
+        <option value="2">
+            Divisão
+        </option>
+    </select>
+    <br><br>
+    <fieldset>
+        <label for="n1" for="n2">Didite os numeros:</label>
+        <br>
+        <label for="n1">numero 1:</label><input type="number" id="n1"> <br>
+        <label for="n2">numero 2:</label><input type="number" id="n2">
+    </fieldset> 
+    <br>
+    <button onclick="ativar()">finalizar operação</button>
+    <br><br><br>
+    <p>Seu resultado é: <b><span id="resul"></span></b></p><br><br>
+    <button onclick="limpar()">limpar</button>
+</body>
+</html>
+

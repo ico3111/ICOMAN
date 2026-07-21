@@ -1,0 +1,82 @@
+*{ margin: 0; padding: 0; box-sizing: border-box;}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(167, 167, 167);
+    border:1px red solid;
+    height: 100%;
+    min-height: 100vh;
+}
+#titulo{
+    font-size: 300%;
+    color: white;
+    text-shadow: 1px 1px 20px black;
+}
+.tudo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 80vh;
+    width: 80%;
+}
+.header{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    height:12%;
+    width: 100%;
+    background-color: #FF80FF;
+    
+}
+.header form{
+    display:flex;
+    gap:1vw;
+}
+.header button{
+    height: 4vh;
+    width: 5.25vw;
+    color:white;
+    background-color: black;
+}
+
+
+.body{
+    display: flex;
+    justify-content: space-between;
+    height: 73%;
+    width: 100%;
+    font-size: 120%;
+}
+
+.esquerda{
+    width: 82%;
+    text-align:justify;
+    background-color: white;
+    padding: 1%;
+}
+.esquerda h1{
+    text-align: center;
+}
+.direita{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 17%;
+    padding: 1.5%;
+    background-color: #FF80FF;
+}
+
+.footer{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 12%;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    padding-left: 1.5%;
+}

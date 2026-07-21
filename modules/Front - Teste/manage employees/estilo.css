@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+}
+
+.header{
+    background-color: rgb(29, 48, 151);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5vh;
+}
+.header> div{
+    margin:0 20px 0;
+}
+.header > .titulo{
+    font-size:medium;
+    font-style: italic;
+    color:white;
+    
+
+}
+.header .buttons :nth-child(1), .header .buttons :nth-child(2){
+    padding: 4px;
+    color:white;
+}
+.header .buttons :nth-child(1){
+    background-color: red;
+    color:white;
+}
+.header .buttons :nth-child(2){
+    background-color: rgb(31, 192, 31);
+}
+.header .buttons :nth-child(2) > i{
+    background-color: rgb(31, 192, 31);
+}
+
+.body{
+    border:solid 1px rgb(136, 134, 134);
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%
+}
+
+td, th{
+    
+    border-bottom: solid 1px #eeeeee;
+    padding: 10px;
+    text-align:left
+}
+
+th {
+    border-bottom-width: 2px;
+}
+
+
+.footer{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5vh;
+    border-bottom:solid 1px rgb(136, 134, 134);
+}
+.footer > div{
+    margin:0 10px 0;
+}
+.acumulado{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.acumulado > div{
+    margin:0 10px 0;
+}
+.footer ul{
+    display: flex;
+    list-style: none;
+}
+.footer li{
+    padding:10px;
+    
+    
+    
+}
+.footer li:hover{
+    background-color: rgb(36, 36, 150);
+    color: white;
+    
+    
+}

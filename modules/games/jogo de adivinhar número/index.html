@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Adivinhe o número!</title>
+</head>
+<body>
+
+    <!-- Div das instruções -->
+    <div id="instrucoes">
+        <h1>Adivinhe o número!</h1>
+        <p>Neste jogo o computador vai sortear um número de 0 a 1000. E seu objetivo é acertar o número, com base nas dicas que o computador lhe oferece.</p>
+        <h2>Respostas do computador</h2>
+        <ul>
+            <li>O número é menor que "x";</li>
+            <li>O número é maior que "x";</li>
+            <li>O número é um pouquinho menor que "x";</li>
+            <li>O número é um pouquinho maior que "x";</li>
+        </ul>
+        <!-- Botão para iniciar o jogo -->
+        <button onclick="iniciarJogo()">Começar</button>
+    </div>
+
+    <!-- Div do jogo (inicialmente oculta) -->
+    <div id="jogo" style="display: none;">
+        <h2>Dica:</h2>
+        <p id="mensagem"></p>
+        <h2>Seu palpite:</h2>
+        <input max="1000" min="0" type="number" id="chat">
+        <button onclick="verificar()">Verificar</button>
+    </div>
+
+    <script>
+        let Numero_final;
+        
+        // Função para iniciar o jogo
+        function iniciarJogo() {
+            // Gera um número aleatório entre 0 e 1000
+            Numero_final = Math.floor(Math.random() * 1000);
+            
+            // Oculta a div das instruções e exibe a div do jogo
+            document.getElementById("instrucoes").style.display = "none";
+            document.getElementById("jogo").style.display = "block";
+        }
+
+        // Função para verificar o palpite do jogador
+        function verificar() {
+            var chat = Number(document.getElementById('chat').value);
+            var mensagem = document.getElementById('mensagem');
+
+            if (chat > Numero_final - 50 && chat < Numero_final) {
+                mensagem.innerHTML = 'O número é um pouco maior que ' + chat;
+            } else if (chat > Numero_final && chat < Numero_final + 50) {
+                mensagem.innerHTML = 'O número é um pouco menor que ' + chat;
+            } else if (chat > Numero_final) {
+                mensagem.innerHTML = 'O número é menor que ' + chat;
+            } else if (chat < Numero_final) {
+                mensagem.innerHTML = 'O número é maior que ' + chat;
+            }else if (chat === Numero_final) {
+                mensagem.innerHTML = 'Você acertou!'
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+
+#span1{
+    display: inline-block;
+    background-color: lime; 
+    color: red; 
+    padding: 2px; 
+    font-size: x-large; 
+    border-radius: 20px; 
+}
+a{
+    color:red; text-decoration: none;
+}
+#span1:hover{
+    background-color: cadetblue;
+}
+#div2{
+    text-align: center;
+}
+img{
+height: 500px; width: 800px;
+}
+h1{
+    text-align: center; text-decoration: underline dotted lime; font-size: xx-large;
+}
+p{
+    text-align: justify; font-size: x-large; margin-left: 30px;
+}

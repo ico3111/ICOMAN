@@ -32,6 +32,7 @@ function assemblePageTop(string $pageTitle, string $styleFile, int $pageWidth = 
                                     &nbsp;<a href="'. HOME .'">HOME</a>&nbsp;|
                                     &nbsp;<a href="'. CHANNELS. '">CHANNELS</a>&nbsp;|
                                     &nbsp;<a href="'. BOARDS .'">BOARDS</a>&nbsp;|
+                                    &nbsp;<a href="'. MODULES .'">MODULES</a>&nbsp;|
                                     &nbsp;<a href="'. LOGOUT .'">LOGOUT</a>&nbsp;|
                                 </center>
                             </td>

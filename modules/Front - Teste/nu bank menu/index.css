@@ -1,0 +1,51 @@
+*{
+    text-align: center;
+}
+.logo{
+    font-size: x-large;
+    
+}
+form{
+    border: solid 1px white;
+    height: 385px;
+    width: 300px;
+    margin: 125px auto 0;
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+}
+body{
+    background-color: blueviolet;
+}
+input{
+    text-align: left !important;
+    width: 88%;
+    padding-bottom: 20px;
+    border:0;
+    border-bottom: solid 1px darkgray !important;
+    outline: none;
+    margin:15px 0 15px
+}
+button{
+    padding: 5% 35% 5%;
+    border: solid 1px darkgray;
+    background-color: white;
+    color:darkgray
+}
+input:focus{
+    color:red !important;
+    border-bottom-color:red !important;
+    caret-color: white;
+}
+button:focus{
+    color:red
+}
+input:focus::placeholder {
+    color: red;
+}
+a{
+    text-decoration: none;
+}
+a:focus{
+    color:blueviolet
+}
