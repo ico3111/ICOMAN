@@ -8,7 +8,7 @@
 
 - Channels > Posts (Online),
 
-- Channel -> Tasks (Online),
+- Boards > Tasks (Online),
 
 - Músicas de Estudo,
 
