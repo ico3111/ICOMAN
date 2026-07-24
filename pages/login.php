@@ -1,20 +1,19 @@
+<aside class="login">
+    <form class="login-form" action="doLogin.php" method="POST">
+        <label for="login">Username</label><br>
+        <input type="text" name="login" minlength="3"><br>
 
-<td valign="top" style="padding: 3px;">
-    <center>
-        <form style="border: 1px dashed #3b5998" action="doLogin.php" method="POST">
-            Username<br>
-            <input type="text" name="login" minlength="3">
-            <br>
-            Password<br>
-            <input type="password" name="password" minlength="3">
-            <br><br>
-            <button class="btn" type="reset">reset</button>&nbsp;&nbsp;
-            <button class="btn" type="submit">login</button>&nbsp;&nbsp; 
-        </form>
-        <br>
-        <a href="register.php">Click here to register!</a>
-    </center>
-</td>
-<td width="60%" style="padding: 3px;">
+        <label for="password">Password</label><br>
+        <input type="password" name="password" minlength="3"><br><br>
+
+        <button class="btn" type="reset">reset</button>
+        <button class="btn" type="submit">login</button>
+    </form>
+    <br><br>
+    <a href="register.php">
+        Click here to register!
+    </a>
+</aside>
+<section class="presentation">
     <?php echo AssembleInitialMessage(true); ?>
-</td>
+</section>
