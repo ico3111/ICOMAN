@@ -1,38 +1,84 @@
 body {
   background-size: cover;
   background-repeat: no-repeat;
+  margin: 0;
+  font-family: "Courier New", Courier, monospace;
 }
 
-table,
-tr,
-td {
-  border-collapse: collapse;
+.container {
+  width: 80%;
+  margin: 0 auto;
+
+  border: 1px solid #dab630;
 }
 
-p {
-  font-size: 14px;
+.header {
+  display: flex;
+  background: #55ffff;
+  color: white;
+}
+
+.header .cell {
+  flex: 1;
+
+  border: 1px solid #dab630;
+
+  padding: 10px;
+  text-align: center;
+}
+
+.content {
+  display: flex;
+}
+
+.login {
+  width: 40%;
+
+  border: 1px solid #dab630;
+
+  padding: 10px;
+
+  text-align: center;
+}
+
+.presentation {
+  width: 60%;
+
+  border: 1px solid #dab630;
+
+  padding: 10px;
+}
+
+.footer {
+  border: 1px solid #dab630;
+
+  text-align: center;
+
+  padding: 20px;
+}
+
+.login-form {
+  border: 1px dashed #3b5998;
+
+  display: inline-block;
+
+  padding: 10px;
 }
 
 .btn {
   border-style: solid;
   border-width: 1px 1px 2px 2px;
-  padding: 2px;
   border-color: #d9dfea #d9dfea #3b5998 #3b5998;
+
   background-color: #538adc;
-  color: #ffffff;
+  color: white;
+
+  padding: 2px;
 }
 
 input {
-  border-width: 1;
-  border-color: #666666;
-  background-color: #d9dfea;
-}
-
-td,
-th {
-  border: 1px solid #dab630;
-  text-align: center;
-  vertical-align: middle;
+  border: 1px solid #666;
+  background: #d9dfea;
 }
 
 audio {
@@ -41,4 +87,8 @@ audio {
 
 .timerInput {
   width: 15px;
+}
+
+p {
+  font-size: 14px;
 }

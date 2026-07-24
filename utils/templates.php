@@ -9,34 +9,31 @@ function assemblePageTop(string $pageTitle, string $styleFile, int $pageWidth = 
     return '<!DOCTYPE html>
             <html lang="en">
             <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link rel="shortcut icon" href="'. MEDIA_URL .'/icons/favicon.ico">
-                <link rel="stylesheet" href="'. STYLES_URL .'/'. $styleFile .'.css">
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="shortcut icon" href="'. MEDIA_URL .'/icons/favicon.ico" />
+                <link rel="stylesheet" href="'. STYLES_URL .'/'. $styleFile .'.css" />
                 <title>'. $pageTitle .'</title>
             </head>
             <body>
-            <center>
-                <table width="'. $pageWidth .'%">
-                    <tbody>
-                        <tr id="header" style="background-color: #55ffff; color: white">
-                            <td>
-                                <center>
-                                    <h2>[ '. APP_NAME .' ]</h2>
-                                    '. $message .'
-                                    '. $error .'
-                                </center>
-                            </td>
-                            <td>
-                                <center>
-                                    &nbsp;<a href="'. HOME .'">HOME</a>&nbsp;|
-                                    &nbsp;<a href="'. CHANNELS. '">CHANNELS</a>&nbsp;|
-                                    &nbsp;<a href="'. BOARDS .'">BOARDS</a>&nbsp;|
-                                    &nbsp;<a href="'. LOGOUT .'">LOGOUT</a>&nbsp;|
-                                </center>
-                            </td>
-                        </tr>
-                        <tr>';
+                <div class="container">
+
+                    <header class="header">
+                        <div class="cell logo">
+                            <h2>['. APP_NAME .']</h2>
+                            '. $message .'
+                            '. $error   .'
+                        </div>
+
+                        <nav class="cell menu">
+                            <a href="'. HOME     .'">HOME</a>     |
+                            <a href="'. CHANNELS .'">CHANNELS</a> |
+                            <a href="'. BOARDS   .'">BOARDS</a>   |
+                            <a href="'. LOGOUT   .'">LOGOUT</a>
+                        </nav>
+                    </header>
+
+                    <main class="content">';
 }
 
 function assemblePageFooter(): string
@@ -74,45 +71,28 @@ function assemblePageFooter(): string
         $imageOptions .= "<option value=\"$value\" $selected>$label</option>";
     }
 
-    return '
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <br>
-                    <center>
-                        <form action="" method="post">
-                            <select id="selectTheme" name="themeMode">
-                                <option value="light" ' . $isThemeLight . '>Theme (light)</option>
-                                <option value="dark" ' . $isThemeDark . '>Darkmode</option>
-                            </select>
-                            &nbsp;
-                            <select id="selectImage" name="themeImage">
-                                ' . $imageOptions . '
-                            </select>
-                            &nbsp;
-                            <button type="submit">Define</button>
-                        </form>
-                    </center>
-                    <br>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <center>
-                        <p>&copy; 2025 All rights reserved. Version ' . APP_VERSION . '</p>
-                    </center>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</center>
-
-<script src="' . SCRIPTS_URL . '/background.js"></script>
-<script src="' . SCRIPTS_URL . '/instantBgChange.js"></script>
-<script src="' . SCRIPTS_URL . '/cronometro.js"></script>
-<script src="' . SCRIPTS_URL . '/timer.js"></script>
-</body>
-</html>';
+    return '</main>
+            <footer class="footer">
+                <form action="" method="post">
+                    <select name="themeMode">
+                        <option value="light" '. $isThemeLight .'>Theme (light)</option>
+                        <option value="dark" '. $isThemeDark .'>Darkmode</option>
+                    </select>
+                    <select id="selectImage" name="themeImage">
+                        '. $imageOptions .'
+                    </select>
+                    <button type="submit">Define</button>
+                </form>
+                <p>&copy; 2025 All rights reserved. Version '. APP_VERSION .'</p>
+            </footer>
+        </div>
+    <script src="' . SCRIPTS_URL . '/background.js"></script>
+    <script src="' . SCRIPTS_URL . '/instantBgChange.js"></script>
+    <script src="' . SCRIPTS_URL . '/cronometro.js"></script>
+    <script src="' . SCRIPTS_URL . '/timer.js"></script>
+    </body>
+    </html>';
+    
 }
 
 function AssembleInitialMessage($isLogin = true)
